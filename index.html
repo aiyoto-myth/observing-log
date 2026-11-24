@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Messier, Caldwell &amp; Herschel 400 Observing Log (Astronomical League) | Observing Log</title>
+<meta name="description" content="Free observing log for the Astronomical League Messier, Binocular Messier, Caldwell and Herschel 400 programs. Checks every entry against the program's rules, shows what's left and what's up tonight, prints the log your club signs. Red night mode, works offline, no sign-up.">
+<link rel="canonical" href="https://samsbench.com/observing-log/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Observing Log: Messier, Caldwell & Herschel 400">
+<meta property="og:description" content="Log at the eyepiece. Every entry is checked against the Astronomical League rules for that list, so missing fields get caught before you submit.">
+<meta property="og:url" content="https://samsbench.com/observing-log/">
+<meta property="og:image" content="https://samsbench.com/observing-log/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EEE8DA">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEE8DA; --paper:#FBF8F1; --ink:#13213A; --ink2:#2E3B55; --line:#CFC5AF; --rule:#B8AC92;
+  --done:#13213A; --doneTx:#FBF8F1; --fix:#B23A1E; --fixSoft:#F6DED4; --ok:#2F6B3F; --okSoft:#DDEBDD;
+  --lock:#7A6A45; --focus:#B23A1E; --btn:#13213A; --btnTx:#FBF8F1;
+  --serif:'Spectral',Georgia,'Times New Roman',serif; --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif; --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+html[data-night="1"]{
+  --bg:#000; --paper:#000; --ink:#D00000; --ink2:#A00000; --line:#300000; --rule:#4A0000;
+  --done:#3A0000; --doneTx:#FF1A00; --fix:#FF0000; --fixSoft:#1C0000; --ok:#D00000; --okSoft:#100000;
+  --lock:#700000; --focus:#FF0000; --btn:#A00000; --btnTx:#000;
+  color-scheme:dark;
+}
+html[data-night="1"] input,html[data-night="1"] select,html[data-night="1"] textarea{accent-color:#A00000}
+html[data-night="1"] input::placeholder,html[data-night="1"] textarea::placeholder{color:#600000}
+html[data-night="1"] input[type=date]::-webkit-calendar-picker-indicator,html[data-night="1"] input[type=time]::-webkit-calendar-picker-indicator{display:none}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 var(--sans);}
+a{color:var(--ink);text-underline-offset:3px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+html[data-night="1"] :focus-visible{outline:2px solid #A00000}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:22px;height:22px;flex:0 0 auto;border:2px solid var(--ink);border-radius:3px;background:var(--paper);display:inline-grid;place-content:center;margin:0;cursor:pointer}
+input[type=checkbox]:checked{background:var(--ink)}
+input[type=checkbox]:checked::after{content:'';width:10px;height:6px;border:solid var(--paper);border-width:0 0 3px 3px;transform:rotate(-45deg) translate(1px,-1px)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;left:-9999px}
+
+/* top bar */
+.top{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.mark{font:700 22px/1 var(--serif);letter-spacing:.01em;margin:0}
+.mark small{font:400 14px var(--sans);margin-left:8px}
+.top .sp{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 16px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:4px;cursor:pointer;text-decoration:none;font-weight:600;font-size:16px}
+.btn.primary{background:var(--btn);color:var(--btnTx);border-color:var(--btn)}
+.btn.small{min-height:36px;padding:4px 12px;font-size:15px}
+.btn.link{border:0;background:none;padding:4px 0;min-height:36px;text-decoration:underline;font-weight:500}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.night{white-space:nowrap}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;padding:36px 0 28px;align-items:center}
+.hero h1{font:700 40px/1.12 var(--serif);margin:0 0 14px;letter-spacing:-.01em}
+.hero p{margin:0 0 12px;font-size:18px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.hero ul{margin:14px 0 0;padding:0;list-style:none}
+.hero li{padding:6px 0 6px 22px;position:relative;border-top:1px dashed var(--rule)}
+.hero li:before{content:'';position:absolute;left:2px;top:15px;width:10px;height:10px;border:1.5px solid var(--ink);transform:rotate(45deg)}
+.demo{background:var(--paper);border:1px solid var(--line);padding:14px;font-family:var(--mono);font-size:13px}
+.demo .ln{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.demo .bad{color:var(--fix);font-weight:600}
+
+/* program tabs */
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:18px 0 0;scrollbar-width:none}
+.tab{flex:0 0 auto;border:1.5px solid var(--ink);background:var(--paper);padding:8px 14px;border-radius:4px 4px 0 0;border-bottom:0;cursor:pointer;min-height:48px;text-align:left}
+.tab b{display:block;font:600 16px/1.2 var(--sans)}
+.tab span{font:13px var(--mono)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+html[data-night="1"] .tab[aria-selected="true"]{background:#000;color:#FF1A00;border:3px solid #FF1A00;border-bottom:0}
+.board{background:var(--paper);border:1.5px solid var(--ink);padding:18px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px}
+.counts{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:16px;margin:0 0 6px}
+.counts b{font:700 26px var(--serif);margin-right:4px}
+.goal{font-size:15px;margin:0 0 12px}
+.bar{height:8px;border:1px solid var(--ink);margin:4px 0 14px;position:relative;background:var(--bg)}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ink)}
+.bar u{position:absolute;top:-4px;bottom:-4px;border-left:2px solid var(--fix)}
+
+/* the plate */
+.plate{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:3px}
+.plate.dense{grid-template-columns:repeat(20,minmax(0,1fr));gap:2px}
+.cell{aspect-ratio:1;border:1px solid var(--rule);background:var(--paper);font:600 11px/1 var(--mono);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;border-radius:2px}
+.plate.dense .cell{font-size:0;border-radius:1px}
+.cell.done{background:var(--done);color:var(--doneTx);border-color:var(--done)}
+.cell.fix{border:2px solid var(--fix);color:var(--fix);background:repeating-linear-gradient(135deg,var(--fixSoft) 0 3px,var(--paper) 3px 6px)}
+.cell.lock{border:1.5px dashed var(--lock);background:var(--bg)}
+.cell:hover{outline:2px solid var(--ink2);outline-offset:0}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-top:10px}
+.legend i{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:5px;border:1px solid var(--rule);background:var(--paper)}
+.legend .l-done{background:var(--done);border-color:var(--done)}
+.legend .l-fix{border:2px solid var(--fix);background:var(--fixSoft)}
+.legend .l-lock{border:1.5px dashed var(--lock);background:var(--bg)}
+
+/* side lists */
+.side h3{font:700 19px/1.25 var(--serif);margin:0 0 8px}
+.side h3 + p{margin:-4px 0 8px;font-size:15px}
+.list{list-style:none;margin:0 0 20px;padding:0;border-top:1px solid var(--line)}
+.list li{border-bottom:1px solid var(--line)}
+.list button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;background:none;border:0;padding:10px 2px;text-align:left;cursor:pointer;min-height:48px}
+.list .nm{font-weight:600}
+.list .meta{font:13px var(--mono);white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+.chip{font:600 12px var(--mono);border:1.5px solid var(--fix);color:var(--fix);padding:1px 6px;border-radius:3px;white-space:nowrap}
+.when{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.when button{border:1.5px solid var(--ink);background:var(--paper);border-radius:20px;padding:4px 12px;min-height:36px;cursor:pointer;font-size:14px}
+.when-chip{border:1.5px solid var(--ink);background:var(--paper);border-radius:20px;padding:2px 12px;min-height:36px;cursor:pointer;font:600 14px var(--mono)}
+.when button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+html[data-night="1"] .when button[aria-pressed="true"]{background:#000;color:#FF1A00;border:2px solid #FF1A00;font-weight:700}
+.empty{padding:12px 0;font-size:15px}
+
+/* setup strip */
+.setup{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:12px 0;font-size:15px}
+.setup b{font-weight:600}
+.setup .mono{font-family:var(--mono);font-size:14px}
+
+.board{margin-bottom:8px}
+body{padding-bottom:84px}
+.fab{position:fixed;right:16px;bottom:16px;z-index:5;box-shadow:0 2px 0 var(--ink);min-height:56px;padding:0 22px;font-size:17px}
+html[data-night="1"] .fab{box-shadow:none}
+
+/* sections */
+section.blk{padding:30px 0;border-top:1px solid var(--rule)}
+section.blk h2{font:700 28px/1.2 var(--serif);margin:0 0 10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.card{background:var(--paper);border:1px solid var(--line);padding:18px}
+.card h3{font:700 20px var(--serif);margin:0 0 8px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+label.f{display:block;font-weight:600;font-size:15px;margin:12px 0 4px}
+label.f .opt{font-weight:400}
+input[type=text],input[type=number],input[type=date],input[type=time],input[type=email],select,textarea{width:100%;min-height:44px;padding:8px 10px;border:1.5px solid var(--rule);background:var(--paper);border-radius:4px;font-size:16px}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 12px}
+.seg{display:flex;gap:4px}
+.seg button{flex:1;min-height:44px;border:1.5px solid var(--rule);background:var(--paper);border-radius:4px;cursor:pointer;font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+html[data-night="1"] .seg button[aria-pressed="true"]{background:#000;color:#FF1A00;border:3px solid #FF1A00}
+html[data-night="1"] .seg button[aria-pressed="true"]::before{content:'\2713 '}
+html[data-night="1"] .seg button{color:#800000}
+html[data-night="1"] .cell{color:#800000;border-color:#3A0000}
+html[data-night="1"] .cell.done{background:#3A0000;color:#FF1A00;border-color:#A00000}
+html[data-night="1"] .cell.fix{border:2px dashed #FF1A00;color:#FF1A00;background:#000}
+html[data-night="1"] .cell.lock{border:1.5px dashed #700000;color:#700000}
+html[data-night="1"] .btn.primary{background:#000;color:#FF1A00;border:2px solid #FF1A00}
+html[data-night="1"] input[type=checkbox]:checked{background:#A00000}
+html[data-night="1"] input[type=checkbox]:checked::after{border-color:#000}
+.hint{font-size:14px;margin:4px 0 0}
+.note{font-size:15px;margin:10px 0 0;min-height:1.4em}
+.warn{border:1.5px solid var(--fix);background:var(--fixSoft);padding:10px 12px;margin:10px 0;font-size:15px}
+.okbox{border:1.5px solid var(--ok);background:var(--okSoft);padding:10px 12px;margin:10px 0;font-size:15px}
+.price{font:700 34px var(--serif)}
+.foot{padding:26px 0 90px;font-size:14px;border-top:1px solid var(--rule)}
+.foot p{margin:6px 0}
+
+/* dialogs */
+dialog{border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);padding:0;max-width:620px;width:calc(100% - 24px);max-height:calc(100% - 24px);border-radius:6px}
+dialog::backdrop{background:rgba(10,14,25,.55)}
+html[data-night="1"] dialog::backdrop{background:rgba(0,0,0,.9)}
+.dh{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 18px 10px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:1}
+.dh h2{font:700 24px/1.2 var(--serif);margin:0}
+.dh p{margin:2px 0 0;font:14px var(--mono)}
+.db{padding:6px 18px 18px}
+.df{display:flex;gap:10px;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--line);position:sticky;bottom:0;background:var(--paper)}
+.x{border:0;background:none;font-size:28px;line-height:1;cursor:pointer;min-width:44px;min-height:44px}
+.sugg{list-style:none;margin:4px 0 0;padding:0;border:1px solid var(--line);max-height:220px;overflow:auto}
+.sugg button{width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:10px;cursor:pointer;min-height:44px}
+.sugg button:hover,.sugg button:focus{background:var(--bg)}
+.entry{border-top:1px solid var(--line);padding:10px 0}
+.entry .eh{display:flex;justify-content:space-between;gap:8px;font:14px var(--mono)}
+.entry p{margin:4px 0}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:15px;margin:10px 0}
+.facts dt{font-weight:600}
+.facts dd{margin:0;font-family:var(--mono);font-size:14px}
+fieldset{border:1px solid var(--line);padding:4px 12px 12px;margin:14px 0 0}
+legend{font-weight:600;padding:0 6px}
+.banner{background:var(--ink);color:var(--paper);padding:10px 0;font-size:15px}
+html[data-night="1"] .banner{background:var(--done);color:var(--doneTx)}
+.banner .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.banner button{background:var(--paper);color:var(--ink);border:0;border-radius:4px;padding:6px 12px;font-weight:600;cursor:pointer;min-height:36px}
+
+#printArea{display:none}
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;padding-top:24px}
+  .hero h1{font-size:31px}
+  .board{grid-template-columns:1fr;padding:14px}
+  .two{grid-template-columns:1fr}
+  .plate{grid-template-columns:repeat(auto-fill,minmax(32px,1fr))}
+}
+@media (max-width:480px){
+  .tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;overflow:visible}
+  .tab{border-radius:4px;border-bottom:1.5px solid var(--ink)}
+  html[data-night="1"] .tab[aria-selected="true"]{border-bottom:3px solid #FF1A00}
+}
+@media (max-width:420px){
+  .grid3{grid-template-columns:1fr 1fr}
+  .mark small{display:none}
+}
+@media print{
+  body{background:#fff;color:#000;font:10pt/1.35 Georgia,serif}
+  body > *:not(#printArea){display:none!important}
+  #printArea{display:block}
+  #printArea h1{font-size:16pt;margin:0 0 4pt}
+  #printArea p{margin:0 0 6pt}
+  #printArea table{width:100%;border-collapse:collapse;font-size:8.5pt}
+  #printArea th,#printArea td{border:0.5pt solid #000;padding:3pt 4pt;vertical-align:top;text-align:left}
+  #printArea th{background:#eee}
+  #printArea tr{page-break-inside:avoid}
+  #printArea .miss{font-weight:bold}
+  @page{size:landscape;margin:12mm}
+}
+</style>
+</head>
+<body>
+<div class="banner" id="saveWarn" hidden role="alert"><div class="wrap"><span><b>This browser refused to save your log</b> (storage full or blocked). Your entries are only in this open page. Save a backup file now.</span><button type="button" id="btnBackup3">Save backup file</button></div></div>
+<div class="banner" id="exBanner" hidden><div class="wrap"><span><b>This is an example log.</b> Nothing here is saved.</span><button type="button" id="btnExOff">Clear it and start my own log</button></div></div>
+
+<div class="wrap">
+  <header class="top">
+    <p class="mark">Observing Log<small>Messier · Caldwell · Herschel 400</small></p>
+    <span class="sp"></span>
+    <button class="btn small night" type="button" id="btnNight" aria-pressed="false">Red light</button>
+  </header>
+
+  <div class="hero" id="hero">
+    <div>
+      <h1>Your Messier, Caldwell and Herschel 400 log, checked before your club sees it.</h1>
+      <p>Log each object at the eyepiece. Every entry is checked against the Astronomical League rules for that list: time, latitude and longitude, seeing, transparency, aperture, power, description.</p>
+      <p>You see what's done, which entries are missing something, and what's left that's up tonight. Then print the log your society officer signs.</p>
+      <div class="cta">
+        <button class="btn primary" type="button" id="btnStart">Log my first object</button>
+        <button class="btn" type="button" id="btnExample">See an example log</button>
+      </div>
+      <ul>
+        <li>Free for Messier and Binocular Messier. No sign-up, nothing to install.</li>
+        <li>Red light mode for the field. Keeps working with no signal once it has loaded.</li>
+        <li>Your log stays on your device. Back it up to a file any time.</li>
+      </ul>
+    </div>
+    <div class="demo" aria-label="What the checks look like">
+      <div class="ln"><span>M13 · 21:40</span><span>complete</span></div>
+      <div class="ln"><span>M92 · 21:58</span><span class="bad">no power</span></div>
+      <div class="ln"><span>NGC 6210 · 22:15</span><span>complete</span></div>
+      <div class="ln"><span>M57 · 22:31</span><span class="bad">no description</span></div>
+      <div class="ln"><span>Messier</span><span>62 done · 2 to fix · 46 left</span></div>
+      <div class="ln" style="border:0"><span>Silver (70)</span><span>8 more</span></div>
+    </div>
+  </div>
+
+  <div id="app">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="board" role="tabpanel" id="board">
+      <div>
+        <div class="counts" id="counts"></div>
+        <p class="goal" id="goal"></p>
+        <div class="bar" id="bar"><i></i></div>
+        <div class="plate" id="plate"></div>
+        <div class="legend"><span><i class="l-done"></i>Done</span><span><i class="l-fix"></i>Logged, missing something</span><span><i></i>Not seen yet</span><span id="lgLock" hidden><i class="l-lock"></i>Logged, unlock to check</span></div>
+        <div class="setup" id="setup"></div>
+      </div>
+      <div class="side">
+        <div id="lockBox"></div>
+        <h3>Fix before you submit</h3>
+        <p>Entries on this list that the coordinator would send back.</p>
+        <ul class="list" id="fixList"></ul>
+        <h3>Still to see, best placed</h3>
+        <div class="when" id="when" role="group" aria-label="Sort by height in the sky at"></div>
+        <ul class="list" id="todoList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <section class="blk" id="printSec">
+    <h2>Print the log for your club</h2>
+    <div class="two">
+      <div class="card">
+        <p style="margin-top:0">Every object on the list you pick, in catalog order, with each field the rules ask for and the UT worked out. Entries missing something are marked so you can fix them first. Give it to whoever reviews logs in your society, or send it to the program coordinator, as the program's page says.</p>
+        <label class="f" for="prProg">List</label>
+        <select id="prProg"></select>
+        <label class="f" for="prName">Your name <span class="opt">(printed at the top)</span></label>
+        <input type="text" id="prName" autocomplete="name">
+        <label class="f" for="prClub">Your society</label>
+        <input type="text" id="prClub">
+        <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600;min-height:36px">Details the coordinator asks for <span class="opt" style="font-weight:400">(printed on top; kept only on this device)</span></summary>
+          <label class="f" for="prAddr">Mailing address</label><textarea id="prAddr" style="min-height:70px" autocomplete="street-address"></textarea>
+          <div class="grid2"><div><label class="f" for="prEmail">Email</label><input type="email" id="prEmail" autocomplete="email"></div><div><label class="f" for="prPhone">Phone</label><input type="text" id="prPhone" autocomplete="tel" inputmode="tel"></div></div>
+          <label class="f" for="prSend">Send the certificate to</label><select id="prSend"><option value="me">Me, at the address above</option><option value="society">My society's awards coordinator</option></select>
+        </details>
+        <label style="display:flex;gap:10px;align-items:center;margin-top:10px;min-height:40px"><input type="checkbox" id="prOff"> Add a sign-off box for the officer who reviews it</label>
+        <label style="display:flex;gap:10px;align-items:center;min-height:40px"><input type="checkbox" id="prTodo"> List the objects not seen yet</label>
+        <label style="display:flex;gap:10px;align-items:center;min-height:40px"><input type="checkbox" id="prDone"> Leave out entries still missing something</label>
+        <div class="row"><button class="btn primary" type="button" id="btnPrint">Print or save as PDF</button><button class="btn" type="button" id="btnCsv">Download CSV</button></div>
+        <p class="note" id="prNote"></p>
+      </div>
+      <div class="card">
+        <h3>Back up your log</h3>
+        <p style="margin-top:0">Your log lives in this browser on this device. Clearing browser data deletes it. Save a backup file after each night out, and open it on another device to carry on there.</p>
+        <p id="bkInfo" class="hint"></p>
+        <div class="row"><button class="btn primary" type="button" id="btnBackup">Save backup file</button><label class="btn" for="restoreFile" style="cursor:pointer">Open a backup</label><input type="file" id="restoreFile" accept=".json,application/json" hidden></div>
+        <p class="note" id="bkNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="proSec">
+    <h2>Caldwell and Herschel 400</h2>
+    <div class="two">
+      <div class="card" id="proCard"></div>
+      <div class="card">
+        <h3>What each list asks you to record</h3>
+        <dl class="facts" id="rulesFacts"></dl>
+        <p class="hint">From each program's page on astroleague.org, read 2026-11-24. Check with your program coordinator before you start if you're unsure about your equipment or method.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>Made by Sam at <a href="https://samsbench.com/">samsbench.com</a>. Not made by or affiliated with the Astronomical League. Object lists: the League's Messier, Caldwell and Herschel 400 program lists. Herschel 400: NGC 7814 (website list) and NGC 1750 (manual) both count, as the League's page says.</p>
+    <p>This app keeps notes only. It doesn't point a telescope or find objects for you, so it fits the no-GoTo rule.</p>
+  </footer>
+</div>
+
+<button class="btn primary fab" type="button" id="btnFab">+ Log an object</button>
+
+<dialog id="dlgLog" aria-labelledby="logTitle">
+  <form method="dialog" id="logForm" novalidate>
+    <div class="dh"><div><h2 id="logTitle">Log an object</h2><p id="logSub"></p></div><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div class="db">
+      <label class="f" for="fObj">Object</label>
+      <input type="text" id="fObj" placeholder="M 13, C 14, NGC 7662 or a name" autocomplete="off" spellcheck="false">
+      <ul class="sugg" id="sugg" hidden></ul>
+      <p class="hint" id="objInfo"></p>
+      <div class="grid2">
+        <div><label class="f" for="fDate">Date</label><input type="date" id="fDate"></div>
+        <div><label class="f" for="fTime">Local time</label><input type="time" id="fTime"></div>
+      </div>
+      <label class="f">Instrument</label>
+      <div class="seg" id="fKind"><button type="button" data-v="scope" aria-pressed="true">Telescope</button><button type="button" data-v="bino" aria-pressed="false">Binoculars</button></div>
+      <div class="grid2">
+        <div><label class="f" for="fAp" id="fApL">Aperture</label><input type="text" id="fAp" list="apList" placeholder="8 in or 200 mm"></div>
+        <div><label class="f" for="fPw">Power</label><input type="text" id="fPw" list="pwList" placeholder="e.g. 120x"><div class="chips" id="pwChips" style="margin-top:6px"></div></div>
+      </div>
+      <datalist id="apList"></datalist><datalist id="pwList"></datalist>
+      <label class="f" for="fName">Telescope name <span class="opt">(optional)</span></label>
+      <input type="text" id="fName" list="nameList" placeholder="e.g. Dob, Orion XT8"><datalist id="nameList"></datalist>
+      <div class="grid2">
+        <div><label class="f">Seeing <span class="opt">1 boiling – 5 steady</span></label><div class="seg" id="fSee"></div></div>
+        <div><label class="f">Transparency <span class="opt">1 hazy – 5 clear</span></label><div class="seg" id="fTr"></div></div>
+      </div>
+      <label class="f" for="fDesc">What you saw in the eyepiece</label>
+      <textarea id="fDesc" maxlength="20000" placeholder="Shape, size, brightness, core, stars resolved, averted vision…"></textarea>
+      <label style="display:flex;gap:10px;align-items:center;margin-top:10px;min-height:44px"><input type="checkbox" id="fSk"> I made a sketch (on paper)</label>
+      <fieldset>
+        <legend>Where</legend>
+        <div class="grid2">
+          <div><label class="f" for="fLat">Latitude</label><input type="text" id="fLat" inputmode="decimal" placeholder="35.20"></div>
+          <div><label class="f" for="fLon">Longitude</label><input type="text" id="fLon" inputmode="decimal" placeholder="-111.65"></div>
+        </div>
+        <div class="row"><button class="btn small" type="button" id="btnGeo">Use my location</button><span class="hint" id="geoNote">West and south are negative, or type 105 W.</span></div>
+      </fieldset>
+      <div id="logCheck"></div>
+    </div>
+    <div class="df"><button class="btn link" type="button" id="btnDelete" hidden>Delete entry</button><span style="flex:1"></span><button class="btn" type="button" data-close>Cancel</button><button class="btn primary" type="submit" id="btnSave">Save entry</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlgObj" aria-labelledby="objTitle">
+  <div class="dh"><div><h2 id="objTitle"></h2><p id="objSub"></p></div><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <div class="db" id="objBody"></div>
+  <div class="df"><button class="btn" type="button" data-close>Close</button><button class="btn primary" type="button" id="btnLogThis">Log this object</button></div>
+</dialog>
+
+<div id="printArea"></div>
+<div class="sr" id="live" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+/* ---------- config ---------- */
+var SITE = 'https://samsbench.com/observing-log/';
+var APP_KEY = 'observing-log';
+var CHECKOUT = 'https://whop.com/checkout/plan_0JmaNbmQ0CbvA';   // $9 one-time (user pick 11-24); with ?a=<affiliate>
+var CHECKOUT_HOME = 'https://whop.com/checkout/ch_mraPnDOTpbENTZC/';   // same plan, returns to samsbench.com/observing-log/?bought=1
+var VERIFY = 'https://app-bizz-api.whop.site/api/verify';
+var PRICE = '$9';
+var FREE_N = 10;          // Caldwell / Herschel 400: objects you can check and print before Pro
+var GIFT = [];            // SHA-256 of gift codes handed out in letters (the codes themselves are not in this file)
+var GC_CODE = 'observinglog';   // GoatCounter site (11-24, same account as Family Formals)
+var KEY = 'olog.v1', PROKEY = 'olog.pro', NIGHTKEY = 'olog.night';
+
+/* ---------- catalog (Astronomical League program lists) ---------- */
+var CAT = {"objs":{"NGC 224":["Galaxy","And",0.713,41.27,"4.5","Andromeda Galaxy"],"NGC 221":["Galaxy","And",0.713,40.87,"10.0",""],"NGC 205":["Galaxy","And",0.673,41.68,"10.0",""],"NGC 598":["Galaxy","Tri",1.565,30.67,"7.0","Triangulum Galaxy"],"NGC 7654":["Open cluster","Cas",23.403,61.58,"8.0",""],"NGC 581":["Open cluster","Cas",1.553,60.7,"7.0",""],"NGC 1039":["Open cluster","Per",2.7,42.78,"6.0",""],"NGC 650":["Planetary nebula","Per",1.707,51.57,"12.0","Little Dumbbell"],"NGC 1952":["Supernova remnant","Tau",5.575,22.02,"9.0","Crab Nebula"],"M45":["Open cluster","Tau",3.783,24.12,"1.4","Pleiades"],"NGC 1960":["Open cluster","Aur",5.602,34.13,"6.5",""],"NGC 2099":["Open cluster","Aur",5.873,32.55,"6.0",""],"NGC 1912":["Open cluster","Aur",5.478,35.83,"7.0",""],"NGC 1976":["Diffuse nebula","Ori",5.588,-5.38,"5.0","Orion Nebula"],"NGC 1982":["Diffuse nebula","Ori",5.592,-5.27,"7.0",""],"NGC 2068":["Diffuse nebula","Ori",5.78,0.07,"8.0",""],"NGC 1904":["Globular cluster","Lep",5.408,-24.55,"8.5",""],"NGC 2168":["Open cluster","Gem",6.148,24.33,"5.5",""],"NGC 2323":["Open cluster","Mon",7.053,-8.33,"7.0",""],"NGC 2287":["Open cluster","CMa",6.783,-20.73,"5.0",""],"NGC 2437":["Open cluster","Pup",7.697,-14.82,"6.5",""],"NGC 2422":["Open cluster","Pup",7.61,-14.5,"4.5",""],"NGC 2447":["Open cluster","Pup",7.743,-23.87,"6.5",""],"NGC 2632":["Open cluster","Cnc",8.668,19.98,"4.0","Beehive Cluster"],"NGC 2682":["Open cluster","Cnc",8.84,11.82,"7.5",""],"NGC 2548":["Open cluster","Hya",8.23,-5.8,"5.5",""],"NGC 3031":["Galaxy","UMa",9.927,69.07,"8.5","Bode's Galaxy"],"NGC 3034":["Galaxy","UMa",9.932,69.68,"9.5","Cigar Galaxy"],"NGC 3587":["Planetary nebula","UMa",11.247,55.02,"12.0","Owl Nebula"],"NGC 3556":["Galaxy","UMa",11.193,55.68,"11.0",""],"NGC 3992":["Galaxy","UMa",11.96,53.38,"11.0",""],"NGC 5457":["Galaxy","UMa",14.055,54.37,"8.5","Pinwheel Galaxy"],"M40":["Double star","UMa",12.37,58.08,"9.0","Winnecke 4"],"NGC 3623":["Galaxy","Leo",11.315,13.1,"10.5",""],"NGC 3627":["Galaxy","Leo",11.337,13.0,"10.0",""],"NGC 3351":["Galaxy","Leo",10.732,11.7,"11.0",""],"NGC 3368":["Galaxy","Leo",10.778,11.82,"10.5",""],"NGC 3379":["Galaxy","Leo",10.797,12.58,"11.0",""],"NGC 5272":["Globular cluster","CVn",13.703,28.38,"7.0",""],"NGC 5194":["Galaxy","CVn",13.5,47.18,"8.0","Whirlpool Galaxy"],"NGC 5055":["Galaxy","CVn",13.263,42.03,"8.5",""],"NGC 4736":["Galaxy","CVn",12.848,41.13,"9.5",""],"NGC 4258":["Galaxy","CVn",12.315,47.32,"9.5",""],"NGC 4472":["Galaxy","Vir",12.497,8.02,"10.0",""],"NGC 4579":["Galaxy","Vir",12.63,11.83,"11.0",""],"NGC 4621":["Galaxy","Vir",12.702,11.65,"11.5",""],"NGC 4649":["Galaxy","Vir",12.728,11.57,"10.5",""],"NGC 4374":["Galaxy","Vir",12.418,12.9,"11.0",""],"NGC 4406":["Galaxy","Vir",12.438,12.95,"11.0",""],"NGC 4486":["Galaxy","Vir",12.515,12.4,"11.0",""],"NGC 4552":["Galaxy","Vir",12.595,12.57,"11.5",""],"NGC 4569":["Galaxy","Vir",12.615,13.17,"11.0",""],"NGC 4303":["Galaxy","Vir",12.367,4.48,"10.5",""],"NGC 4594":["Galaxy","Vir",12.665,-11.62,"9.5","Sombrero Galaxy"],"NGC 5024":["Globular cluster","Com",13.215,18.17,"8.5",""],"NGC 4826":["Galaxy","Com",12.945,21.68,"9.0","Black Eye Galaxy"],"NGC 4382":["Galaxy","Com",12.425,18.2,"10.5",""],"NGC 4501":["Galaxy","Com",12.535,14.43,"11.0",""],"NGC 4192":["Galaxy","Com",12.232,14.92,"11.0",""],"NGC 4254":["Galaxy","Com",12.315,14.43,"10.5",""],"NGC 4321":["Galaxy","Com",12.383,15.83,"10.5",""],"NGC 4548":["Galaxy","Com",12.592,14.5,"11.5",""],"NGC 4590":["Globular cluster","Hya",12.658,-26.75,"9.0",""],"NGC 5236":["Galaxy","Hya",13.618,-29.87,"8.5",""],"NGC 5904":["Globular cluster","Ser",15.31,2.08,"7.0",""],"NGC 5866":["Galaxy","Dra",15.108,55.75,"10.5",""],"NGC 6205":["Globular cluster","Her",16.695,36.47,"7.0","Hercules Cluster"],"NGC 6341":["Globular cluster","Her",17.285,43.13,"7.5",""],"NGC 6333":["Globular cluster","Oph",17.32,-18.52,"9.0",""],"NGC 6254":["Globular cluster","Oph",16.952,-4.1,"7.5",""],"NGC 6218":["Globular cluster","Oph",16.787,-1.95,"8.0",""],"NGC 6402":["Globular cluster","Oph",17.627,-3.25,"9.5",""],"NGC 6273":["Globular cluster","Oph",17.043,-26.27,"8.5",""],"NGC 6266":["Globular cluster","Oph",17.02,-30.12,"8.0",""],"NGC 6171":["Globular cluster","Oph",16.542,-13.05,"10.0",""],"NGC 6121":["Globular cluster","Sco",16.393,-26.53,"7.5",""],"NGC 6093":["Globular cluster","Sco",16.283,-22.98,"8.5",""],"NGC 6405":["Open cluster","Sco",17.668,-32.22,"4.5","Butterfly Cluster"],"NGC 6475":["Open cluster","Sco",17.898,-34.82,"3.5","Ptolemy's Cluster"],"NGC 6705":["Open cluster","Sct",18.852,-6.27,"7.0","Wild Duck Cluster"],"NGC 6694":["Open cluster","Sct",18.753,-9.4,"9.5",""],"NGC 6611":["Cluster + nebula","Ser",18.313,-13.78,"6.5","Eagle Nebula"],"NGC 6618":["Cluster + nebula","Sgr",18.347,-16.18,"7.0","Omega Nebula"],"NGC 6613":["Open cluster","Sgr",18.332,-17.13,"8.0",""],"M24":["Star cloud","Sgr",18.282,-18.48,"4.6","Sagittarius Star Cloud"],"NGC 6514":["Cluster + nebula","Sgr",18.038,-23.03,"5.0","Trifid Nebula"],"NGC 6531":["Open cluster","Sgr",18.077,-22.5,"7.0",""],"NGC 6523":["Cluster + nebula","Sgr",18.052,-24.38,"5.0","Lagoon Nebula"],"NGC 6656":["Globular cluster","Sgr",18.607,-29.9,"6.5",""],"NGC 6626":["Globular cluster","Sgr",18.408,-24.87,"8.5",""],"NGC 6494":["Open cluster","Sgr",17.947,-19.02,"6.0",""],"IC 4725":["Open cluster","Sgr",18.48,-19.28,"4.9",""],"NGC 6715":["Globular cluster","Sgr",18.918,-30.48,"8.5",""],"NGC 6809":["Globular cluster","Sgr",19.667,-30.97,"7.0",""],"NGC 6637":["Globular cluster","Sgr",18.573,-32.35,"9.0",""],"NGC 6681":["Globular cluster","Sgr",18.72,-32.3,"9.0",""],"NGC 6864":["Globular cluster","Sgr",20.102,-21.92,"9.5",""],"NGC 6779":["Globular cluster","Lyr",19.277,30.18,"9.5",""],"NGC 6720":["Planetary nebula","Lyr",18.893,33.03,"9.5","Ring Nebula"],"NGC 6913":["Open cluster","Cyg",20.398,38.53,"9.0",""],"NGC 7092":["Open cluster","Cyg",21.537,48.43,"5.5",""],"NGC 6853":["Planetary nebula","Vul",19.993,22.72,"7.5","Dumbbell Nebula"],"NGC 6838":["Globular cluster","Sge",19.897,18.78,"8.5",""],"NGC 7099":["Globular cluster","Cap",21.673,-23.18,"8.5",""],"NGC 7089":["Globular cluster","Aqr",21.558,-0.82,"7.5",""],"NGC 6981":["Globular cluster","Aqr",20.892,-12.53,"10.0",""],"NGC 6994":["Open cluster","Aqr",20.983,-12.63,"9.0",""],"NGC 7078":["Globular cluster","Peg",21.5,12.17,"7.5",""],"NGC 628":["Galaxy","Psc",1.61,15.8,"10.5",""],"NGC 1068":["Galaxy","Cet",2.712,-0.03,"10.5",""],"NGC 188":["Open cluster","Cep",0.74,85.33,"8.1",""],"NGC 40":["Planetary nebula","Cep",0.217,72.53,"11.6",""],"NGC 4236":["Galaxy","Dra",12.278,69.47,"9.7",""],"NGC 7023":["Bright nebula","Cep",21.03,68.2,"6.8","Reflection Nebula"],"IC 342":["Galaxy","Cam",3.78,68.1,"9.2",""],"NGC 6543":["Planetary nebula","Dra",17.977,66.63,"8.8","Cat\u2019s Eye Nebula"],"NGC 2403":["Galaxy","Cam",7.615,65.6,"8.9",""],"NGC 559":["Open cluster","Cas",1.492,63.3,"9.5",""],"Sh2-155":["Bright nebula","Cep",22.947,62.62,"7.7","Cave Nebula"],"NGC 663":["Open cluster","Cas",1.767,61.25,"7.1",""],"NGC 7635":["Bright nebula","Cas",23.345,61.2,"7.0","Bubble Nebula"],"NGC 6946":["Galaxy","Cep",20.58,60.15,"9.7",""],"NGC 457":["Open cluster","Cas",1.318,58.33,"6.4","Phi Cas Cluster"],"C14":["Double cluster","Per",2.333,57.13,"4.3","Double Cluster (Sword Handle)"],"NGC 6826":["Planetary nebula","Cyg",19.747,50.52,"9.8","Blinking Nebula"],"NGC 7243":["Open cluster","Lac",22.255,49.88,"6.4",""],"NGC 147":["Galaxy","Cas",0.553,48.5,"9.3",""],"NGC 185":["Galaxy","Cas",0.65,48.33,"9.2",""],"IC 5146":["Bright nebula","Cyg",21.892,47.27,"10.0","Cocoon Nebula"],"NGC 7000":["Bright nebula","Cyg",20.98,44.33,"6.0","North America Nebula"],"NGC 4449":["Galaxy","CVn",12.47,44.1,"9.4",""],"NGC 7662":["Planetary nebula","And",23.432,42.55,"9.2",""],"NGC 891":["Galaxy","And",2.377,42.35,"9.9",""],"NGC 1275":["Galaxy","Per",3.33,41.52,"11.6","Per A radio source"],"NGC 2419":["Globular cluster","Lyn",7.635,38.88,"10.4",""],"NGC 4244":["Galaxy","CVn",12.292,37.82,"10.6",""],"NGC 6888":["Bright nebula","Cyg",20.2,38.35,"7.5","Crescent Nebula"],"NGC 752":["Open cluster","And",1.963,37.68,"5.7",""],"NGC 5005":["Galaxy","CVn",13.182,37.05,"9.8",""],"NGC 7331":["Galaxy","Peg",22.618,34.42,"9.5",""],"IC 405":["Bright nebula","Aur",5.27,34.27,"6.0","Flaming Star Nebula"],"NGC 4631":["Galaxy","CVn",12.702,32.53,"9.3",""],"C33":["Supernova remnant","Cyg",20.94,31.72,"","East Veil Nebula"],"NGC 6960":["Supernova remnant","Cyg",20.762,30.72,"","West Veil Nebula"],"NGC 4889":["Galaxy","Com",13.002,27.98,"11.4","Brightest in cluster"],"NGC 4559":["Galaxy","Com",12.6,27.97,"9.8",""],"NGC 6885":["Open cluster","Vul",20.2,26.48,"5.7",""],"NGC 4565":["Galaxy","Com",12.605,25.98,"9.6",""],"NGC 2392":["Planetary nebula","Gem",7.487,20.92,"9.9","Eskimo Nebula"],"NGC 3626":["Galaxy","Leo",11.335,18.35,"10.9",""],"C41":["Open cluster","Tau",4.45,16.0,"1.0","Hyades"],"NGC 7006":["Globular cluster","Del",21.025,16.18,"10.6","Very distant globular"],"NGC 7814":["Galaxy","Peg",0.055,16.15,"10.5",""],"NGC 7479":["Galaxy","Peg",23.082,12.32,"11.0",""],"NGC 5248":["Galaxy","Boo",13.625,8.88,"10.2",""],"NGC 2261":["Bright nebula","Mon",6.653,8.73,"10.0","Hubble\u2019s Variable Neb."],"NGC 6934":["Globular cluster","Del",20.57,7.4,"8.9",""],"NGC 2775":["Galaxy","Cnc",9.172,7.03,"10.3",""],"C49":["Bright nebula","Mon",6.538,5.05,"","Rosette Nebula"],"NGC 2244":["Open cluster","Mon",6.54,4.87,"4.8",""],"IC 1613":["Galaxy","Cet",1.08,2.12,"9.0",""],"NGC 4697":["Galaxy","Vir",12.81,-5.8,"9.3",""],"NGC 3115":["Galaxy","Sex",10.087,-7.72,"9.1","Spindle Galaxy"],"NGC 2506":["Open cluster","Mon",8.003,-10.78,"7.6",""],"NGC 7009":["Planetary nebula","Aqr",21.07,-11.37,"8.3","Saturn Nebula"],"NGC 246":["Planetary nebula","Cet",0.783,-11.88,"8.0",""],"NGC 6822":["Galaxy","Sgr",19.748,-14.8,"9.3","Barnard\u2019s Galaxy"],"NGC 2360":["Open cluster","CMa",7.297,-15.62,"7.2",""],"NGC 3242":["Planetary nebula","Hya",10.413,-18.63,"8.6","Ghost of Jupiter"],"NGC 4038":["Galaxy","Crv",12.032,-18.87,"11.3","The Antennae"],"NGC 4039":["Galaxy","Crv",12.032,-18.88,"13.0","The Antennae"],"NGC 247":["Galaxy","Cet",0.785,-20.77,"8.9",""],"NGC 7293":["Planetary nebula","Aqr",22.493,-20.8,"6.5","Helix Nebula"],"NGC 2362":["Open cluster","CMa",7.313,-24.95,"4.1","Tau CMa Cluster"],"NGC 253":["Galaxy","Scl",0.793,-25.28,"7.1","Sculptor Galaxy"],"NGC 5694":["Globular cluster","Hya",14.66,-26.53,"10.2",""],"NGC 1097":["Galaxy","For",2.772,-30.28,"9.2",""],"NGC 6729":["Bright nebula","CrA",19.032,-36.95,"9.7","R CrA Nebula"],"NGC 6302":["Planetary nebula","Sco",17.228,-37.1,"12.8","Bug Nebula"],"NGC 300":["Galaxy","Scl",0.915,-37.68,"8.1",""],"NGC 2477":["Open cluster","Pup",7.872,-38.55,"5.8",""],"NGC 55":["Galaxy","Scl",0.248,-39.18,"8.2","Brightest in Scl Cluster"],"NGC 1851":["Globular cluster","Col",5.235,-40.05,"7.3",""],"NGC 3132":["Planetary nebula","Vel",10.128,-40.43,"8.2",""],"NGC 6124":["Open cluster","Sco",16.427,-40.67,"5.8",""],"NGC 6231":["Open cluster","Sco",16.9,-41.8,"2.6",""],"NGC 5128":["Galaxy","Cen",13.425,-43.02,"7.0","Cen A radio source"],"NGC 6541":["Globular cluster","CrA",18.133,-43.7,"6.6",""],"NGC 3201":["Globular cluster","Vel",10.293,-46.42,"6.7",""],"NGC 5139":["Globular cluster","Cen",13.447,-47.48,"3.6","Omega Centauri"],"NGC 6352":["Globular cluster","Ara",17.425,-48.42,"8.1",""],"NGC 6193":["Open cluster","Ara",16.688,-48.77,"5.2",""],"NGC 4945":["Galaxy","Cen",13.09,-49.47,"9.5",""],"NGC 5286":["Globular cluster","Cen",13.773,-51.37,"7.6",""],"IC 2391":["Open cluster","Vel",8.67,-53.07,"2.5","Omicron Vel Cluster"],"NGC 6397":["Globular cluster","Ara",17.678,-53.67,"5.6",""],"NGC 1261":["Globular cluster","Hor",3.205,-55.22,"8.4",""],"NGC 5823":["Open cluster","Cir",15.095,-55.6,"7.9",""],"NGC 6087":["Open cluster","Nor",16.315,-57.9,"5.4","S Nor Cluster"],"NGC 2867":["Planetary nebula","Car",9.357,-58.32,"9.7",""],"NGC 3532":["Open cluster","Car",11.107,-58.67,"3.0",""],"NGC 3372":["Bright nebula","Car",10.73,-59.87,"6.2","Eta Carinae Nebula"],"NGC 6752":["Globular cluster","Pav",19.182,-59.98,"5.4",""],"NGC 4755":["Open cluster","Cru",12.893,-60.33,"4.2","Jewel Box Cluster"],"NGC 6025":["Open cluster","TrA",16.062,-60.5,"5.1",""],"NGC 2516":["Open cluster","Car",7.972,-60.87,"3.8",""],"NGC 3766":["Open cluster","Cen",11.602,-61.62,"5.3",""],"NGC 4609":["Open cluster","Cru",12.705,-62.97,"6.9",""],"C99":["Dark nebula","Cru",12.883,-63.0,"","Coal Sack"],"IC 2944":["Open cluster","Cen",11.61,-63.03,"4.5","Lambda Cen Cluster"],"NGC 6744":["Galaxy","Pav",19.163,-63.85,"9.0",""],"IC 2602":["Open cluster","Car",10.72,-64.4,"1.9","Theta Car Cluster"],"NGC 2070":["Bright nebula","Dor",5.645,-69.1,"1.0","Tarantula Neb. in LMC"],"NGC 362":["Globular cluster","Tuc",1.053,-70.85,"6.6",""],"NGC 4833":["Globular cluster","Mus",12.993,-70.88,"7.3",""],"NGC 104":["Globular cluster","Tuc",0.402,-72.08,"4.0","47 Tucanae"],"NGC 6101":["Globular cluster","Aps",16.43,-72.2,"9.3",""],"NGC 4372":["Globular cluster","Mus",12.43,-72.67,"7.8",""],"NGC 3195":["Planetary nebula","Cha",10.158,-80.87,"",""],"NGC 129":["Open cluster","Cas",0.498,60.23,"10.0",""],"NGC 136":["Open cluster","Cas",0.525,61.53,"11.5",""],"NGC 157":["Galaxy","Cet",0.582,-8.4,"11.5",""],"NGC 225":["Open cluster","Cas",0.723,61.78,"9.0",""],"NGC 278":["Galaxy","Cas",0.867,47.55,"12.5",""],"NGC 288":["Globular cluster","Scl",0.88,-26.58,"9.0",""],"NGC 381":["Open cluster","Cas",1.138,61.58,"9.5",""],"NGC 404":["Galaxy","And",1.158,35.72,"12.0",""],"NGC 436":["Open cluster","Cas",1.26,58.82,"9.5",""],"NGC 488":["Galaxy","Psc",1.363,5.27,"11.5",""],"NGC 524":["Galaxy","Psc",1.413,9.55,"12.0",""],"NGC 584":["Galaxy","Cet",1.522,-6.85,"12.0",""],"NGC 596":["Galaxy","Cet",1.547,-7.02,"12.5",""],"NGC 613":["Galaxy","Scl",1.572,-29.4,"11.0",""],"NGC 615":["Galaxy","Cet",1.585,-7.32,"12.5",""],"NGC 637":["Open cluster","Cas",1.715,64.0,"7.5",""],"NGC 651":["Planetary nebula","Per",1.705,51.57,"12.0",""],"NGC 654":["Open cluster","Cas",1.735,61.88,"10.0",""],"NGC 659":["Open cluster","Cas",1.737,60.7,"10.0",""],"NGC 720":["Galaxy","Cet",1.883,-13.73,"11.5",""],"NGC 772":["Galaxy","Ari",1.99,19.0,"11.5",""],"NGC 779":["Galaxy","Cet",1.995,-5.97,"12.0",""],"NGC 869":["Open cluster","Per",2.317,57.15,"4.5",""],"NGC 884":["Open cluster","Per",2.373,57.12,"4.5",""],"NGC 908":["Galaxy","Cet",2.385,-21.22,"11.0",""],"NGC 936":["Galaxy","Cet",2.462,-1.15,"11.0",""],"NGC 1022":["Galaxy","Cet",2.642,-6.67,"12.5",""],"NGC 1023":["Galaxy","Per",2.675,39.05,"11.0",""],"NGC 1027":["Open cluster","Cas",2.712,61.55,"7.5",""],"NGC 1052":["Galaxy","Cet",2.683,-8.25,"12.0",""],"NGC 1055":["Galaxy","Cet",2.697,0.43,"11.5",""],"NGC 1084":["Galaxy","Eri",2.765,-7.58,"12.0",""],"NGC 1245":["Open cluster","Per",3.245,47.25,"9.0",""],"NGC 1342":["Open cluster","Per",3.527,37.33,"7.0",""],"NGC 1407":["Galaxy","Eri",3.668,-18.57,"12.0",""],"NGC 1444":["Open cluster","Per",3.823,52.67,"6.5",""],"NGC 1501":["Planetary nebula","Cam",4.117,60.92,"13.5",""],"NGC 1502":["Open cluster","Cam",4.128,62.33,"5.5",""],"NGC 1513":["Open cluster","Per",4.167,49.52,"9.0",""],"NGC 1528":["Open cluster","Per",4.257,51.23,"6.5",""],"NGC 1535":["Planetary nebula","Eri",4.237,-12.73,"",""],"NGC 1545":["Open cluster","Per",4.348,50.25,"8.0",""],"NGC 1647":["Open cluster","Tau",4.767,19.07,"6.0",""],"NGC 1664":["Open cluster","Aur",4.852,43.7,"8.0",""],"NGC 1788":["Diffuse nebula","Ori",5.115,-3.33,"",""],"NGC 1817":["Open cluster","Tau",5.202,16.7,"8.0",""],"NGC 1857":["Open cluster","Aur",5.337,39.35,"8.5",""],"NGC 1907":["Open cluster","Aur",5.467,35.32,"10.5",""],"NGC 1931":["Cluster + nebula","Aur",5.523,34.25,"13.0",""],"NGC 1961":["Galaxy","Cam",5.703,69.38,"11.5",""],"NGC 1964":["Galaxy","Lep",5.555,-21.95,"11.5",""],"NGC 1980":["Cluster + nebula","Ori",5.587,-5.92,"2.5",""],"NGC 1999":["Diffuse nebula","Ori",5.608,-6.72,"",""],"NGC 2022":["Planetary nebula","Ori",5.702,9.08,"13.0",""],"NGC 2024":["Diffuse nebula","Ori",5.7,-1.83,"",""],"NGC 2126":["Open cluster","Aur",6.05,49.9,"10.0",""],"NGC 2129":["Open cluster","Gem",6.017,23.3,"7.0",""],"NGC 2158":["Open cluster","Gem",6.125,24.1,"12.0",""],"NGC 2169":["Open cluster","Ori",6.14,13.95,"7.0",""],"NGC 2185":["Diffuse nebula","Mon",6.185,-6.2,"",""],"NGC 2186":["Open cluster","Ori",6.203,5.45,"9.0",""],"NGC 2194":["Open cluster","Ori",6.23,12.8,"10.5",""],"NGC 2204":["Open cluster","CMa",6.262,-18.65,"9.5",""],"NGC 2215":["Open cluster","Mon",6.35,-7.28,"8.5",""],"NGC 2232":["Open cluster","Mon",6.443,-4.75,"4.0",""],"NGC 2251":["Open cluster","Mon",6.578,8.37,"8.5",""],"NGC 2264":["Cluster + nebula","Mon",6.685,9.88,"4.0",""],"NGC 2266":["Open cluster","Gem",6.72,26.97,"9.5",""],"NGC 2281":["Open cluster","Aur",6.822,41.07,"7.0",""],"NGC 2286":["Open cluster","Mon",6.793,-3.17,"8.5",""],"NGC 2301":["Open cluster","Mon",6.863,0.47,"6.5",""],"NGC 2304":["Open cluster","Gem",6.917,18.02,"11.0",""],"NGC 2311":["Open cluster","Mon",6.963,-4.58,"9.5",""],"NGC 2324":["Open cluster","Mon",7.07,1.05,"9.0",""],"NGC 2335":["Open cluster","Mon",7.11,-10.08,"9.5",""],"NGC 2343":["Open cluster","Mon",7.138,-10.65,"8.0",""],"NGC 2353":["Open cluster","Mon",7.243,-10.3,"5.0",""],"NGC 2354":["Open cluster","CMa",7.238,-25.73,"9.0",""],"NGC 2355":["Open cluster","Gem",7.282,13.78,"9.5",""],"NGC 2371":["Planetary nebula","Gem",7.427,29.48,"13.0",""],"NGC 2372":["Planetary nebula","Gem",7.427,29.48,"13.0",""],"NGC 2395":["Open cluster","Gem",7.452,13.58,"9.5",""],"NGC 2420":["Open cluster","Gem",7.642,21.57,"10.0",""],"NGC 2421":["Open cluster","Pup",7.605,-20.62,"9.0",""],"NGC 2423":["Open cluster","Pup",7.618,-13.87,"7.0",""],"NGC 2438":["Planetary nebula","Pup",7.697,-14.73,"11.5",""],"NGC 2440":["Planetary nebula","Pup",7.698,-18.22,"11.5",""],"NGC 2479":["Open cluster","Pup",7.918,-17.72,"",""],"NGC 2482":["Open cluster","Pup",7.915,-24.3,"8.5",""],"NGC 2489":["Open cluster","Pup",7.937,-30.07,"9.5",""],"NGC 2509":["Open cluster","Pup",8.012,-19.07,"9.5",""],"NGC 2527":["Open cluster","Pup",8.088,-28.17,"8.0",""],"NGC 2539":["Open cluster","Pup",8.178,-12.83,"8.0",""],"NGC 2567":["Open cluster","Pup",8.305,-30.63,"8.5",""],"NGC 2571":["Open cluster","Pup",8.315,-29.73,"7.5",""],"NGC 2613":["Galaxy","Pyx",8.555,-22.97,"11.0",""],"NGC 2627":["Open cluster","Pyx",8.622,-29.95,"8.5",""],"NGC 2655":["Galaxy","Cam",8.927,78.22,"11.5",""],"NGC 2681":["Galaxy","UMa",8.893,51.3,"11.5",""],"NGC 2683":["Galaxy","Lyn",8.88,33.42,"11.0",""],"NGC 2742":["Galaxy","UMa",9.127,60.48,"12.5",""],"NGC 2768":["Galaxy","UMa",9.192,60.05,"12.0",""],"NGC 2782":["Galaxy","Lyn",9.235,40.12,"12.5",""],"NGC 2787":["Galaxy","UMa",9.322,69.22,"12.0",""],"NGC 2811":["Galaxy","Hya",9.272,-16.3,"13.0",""],"NGC 2841":["Galaxy","UMa",9.367,50.98,"10.5",""],"NGC 2859":["Galaxy","LMi",9.405,34.53,"12.0",""],"NGC 2903":["Galaxy","Leo",9.535,21.48,"10.0",""],"NGC 2950":["Galaxy","UMa",9.71,58.85,"12.5",""],"NGC 2964":["Galaxy","Leo",9.715,31.85,"12.5",""],"NGC 2974":["Galaxy","Sex",9.71,-3.72,"12.5",""],"NGC 2976":["Galaxy","UMa",9.788,67.92,"11.5",""],"NGC 2985":["Galaxy","UMa",9.838,72.28,"11.5",""],"NGC 3077":["Galaxy","UMa",10.057,68.75,"11.5",""],"NGC 3079":["Galaxy","UMa",10.033,55.68,"12.0",""],"NGC 3147":["Galaxy","Dra",10.282,73.42,"12.0",""],"NGC 3166":["Galaxy","Sex",10.23,3.43,"11.5",""],"NGC 3169":["Galaxy","Sex",10.237,3.48,"11.5",""],"NGC 3184":["Galaxy","UMa",10.305,41.42,"11.0",""],"NGC 3190":["Galaxy","Leo",10.302,21.82,"12.0",""],"NGC 3193":["Galaxy","Leo",10.308,21.88,"12.5",""],"NGC 3198":["Galaxy","UMa",10.332,45.53,"11.0",""],"NGC 3226":["Galaxy","Leo",10.392,19.88,"12.5",""],"NGC 3227":["Galaxy","Leo",10.393,19.85,"12.0",""],"NGC 3245":["Galaxy","LMi",10.455,28.5,"12.0",""],"NGC 3277":["Galaxy","LMi",10.548,28.5,"13.0",""],"NGC 3294":["Galaxy","LMi",10.603,37.32,"12.0",""],"NGC 3310":["Galaxy","UMa",10.647,53.5,"11.5",""],"NGC 3344":["Galaxy","LMi",10.727,24.92,"11.0",""],"NGC 3377":["Galaxy","Leo",10.795,13.98,"11.5",""],"NGC 3384":["Galaxy","Leo",10.803,12.63,"11.5",""],"NGC 3395":["Galaxy","LMi",10.832,32.98,"12.5",""],"NGC 3412":["Galaxy","Leo",10.847,13.4,"12.0",""],"NGC 3414":["Galaxy","LMi",10.855,27.97,"12.0",""],"NGC 3432":["Galaxy","LMi",10.875,36.62,"12.0",""],"NGC 3486":["Galaxy","LMi",11.008,28.98,"11.0",""],"NGC 3489":["Galaxy","Leo",11.005,13.9,"11.5",""],"NGC 3504":["Galaxy","LMi",11.033,28.12,"12.0",""],"NGC 3521":["Galaxy","Leo",11.098,0.03,"10.5",""],"NGC 3593":["Galaxy","Leo",11.243,12.82,"12.0",""],"NGC 3607":["Galaxy","Leo",11.282,18.07,"12.0",""],"NGC 3608":["Galaxy","Leo",11.282,18.17,"12.5",""],"NGC 3610":["Galaxy","UMa",11.307,58.8,"12.0",""],"NGC 3613":["Galaxy","UMa",11.31,58.0,"12.0",""],"NGC 3619":["Galaxy","UMa",11.322,57.77,"12.5",""],"NGC 3621":["Galaxy","Hya",11.305,-32.8,"10.0",""],"NGC 3628":["Galaxy","Leo",11.338,13.6,"10.5",""],"NGC 3631":["Galaxy","UMa",11.35,53.18,"11.5",""],"NGC 3640":["Galaxy","Leo",11.352,3.25,"12.0",""],"NGC 3655":["Galaxy","Leo",11.382,16.6,"13.0",""],"NGC 3665":["Galaxy","UMa",11.388,38.9,"12.5",""],"NGC 3675":["Galaxy","UMa",11.437,43.6,"11.5",""],"NGC 3686":["Galaxy","Leo",11.462,17.23,"12.0",""],"NGC 3726":["Galaxy","UMa",11.557,47.03,"11.0",""],"NGC 3729":["Galaxy","UMa",11.565,53.13,"13.0",""],"NGC 3810":["Galaxy","Leo",11.683,11.48,"11.5",""],"NGC 3813":["Galaxy","UMa",11.688,36.55,"13.0",""],"NGC 3877":["Galaxy","UMa",11.768,47.5,"12.0",""],"NGC 3893":["Galaxy","UMa",11.81,48.72,"11.5",""],"NGC 3898":["Galaxy","UMa",11.82,56.1,"11.5",""],"NGC 3900":["Galaxy","Leo",11.82,27.03,"12.5",""],"NGC 3912":["Galaxy","Leo",11.835,26.48,"13.0",""],"NGC 3938":["Galaxy","UMa",11.88,44.13,"11.0",""],"NGC 3941":["Galaxy","UMa",11.882,37.0,"11.5",""],"NGC 3945":["Galaxy","UMa",11.887,60.68,"12.0",""],"NGC 3949":["Galaxy","UMa",11.895,47.87,"12.0",""],"NGC 3953":["Galaxy","UMa",11.897,52.33,"11.0",""],"NGC 3962":["Galaxy","Crt",11.913,-13.97,"12.5",""],"NGC 3982":["Galaxy","UMa",11.942,55.13,"12.5",""],"NGC 3998":["Galaxy","UMa",11.967,55.47,"12.0",""],"NGC 4026":["Galaxy","UMa",11.99,50.97,"12.0",""],"NGC 4027":["Galaxy","Crv",11.993,-19.25,"12.0",""],"NGC 4030":["Galaxy","Vir",12.007,-1.08,"11.5",""],"NGC 4036":["Galaxy","UMa",12.025,61.9,"12.0",""],"NGC 4041":["Galaxy","UMa",12.037,62.15,"12.0",""],"NGC 4051":["Galaxy","UMa",12.07,44.55,"11.5",""],"NGC 4085":["Galaxy","UMa",12.09,50.37,"13.0",""],"NGC 4088":["Galaxy","UMa",12.093,50.55,"11.5",""],"NGC 4102":["Galaxy","UMa",12.108,52.72,"12.5",""],"NGC 4111":["Galaxy","CVn",12.118,43.08,"12.0",""],"NGC 4143":["Galaxy","CVn",12.162,42.55,"12.5",""],"NGC 4147":["Globular cluster","Com",12.168,18.55,"11.0",""],"NGC 4150":["Galaxy","Com",12.177,30.42,"12.5",""],"NGC 4151":["Galaxy","CVn",12.177,39.42,"11.5",""],"NGC 4179":["Galaxy","Vir",12.215,1.32,"12.0",""],"NGC 4203":["Galaxy","Com",12.253,33.22,"12.0",""],"NGC 4214":["Galaxy","CVn",12.262,36.33,"10.5",""],"NGC 4216":["Galaxy","Vir",12.265,13.15,"11.0",""],"NGC 4245":["Galaxy","Com",12.295,29.62,"12.5",""],"NGC 4251":["Galaxy","Com",12.303,28.18,"12.0",""],"NGC 4261":["Galaxy","Vir",12.323,5.83,"11.5",""],"NGC 4273":["Galaxy","Vir",12.333,5.35,"12.5",""],"NGC 4274":["Galaxy","Com",12.332,29.62,"11.5",""],"NGC 4278":["Galaxy","Com",12.337,29.3,"11.5",""],"NGC 4281":["Galaxy","Vir",12.34,5.4,"12.5",""],"NGC 4293":["Galaxy","Com",12.355,18.4,"11.5",""],"NGC 4314":["Galaxy","Com",12.377,29.9,"11.5",""],"NGC 4346":["Galaxy","CVn",12.39,47.0,"12.5",""],"NGC 4350":["Galaxy","Com",12.4,16.7,"12.0",""],"NGC 4361":["Planetary nebula","Crv",12.408,-18.8,"11.0",""],"NGC 4365":["Galaxy","Vir",12.408,7.33,"11.0",""],"NGC 4371":["Galaxy","Vir",12.417,11.72,"12.0",""],"NGC 4394":["Galaxy","Com",12.433,18.22,"12.0",""],"NGC 4414":["Galaxy","Com",12.44,31.23,"11.5",""],"NGC 4419":["Galaxy","Com",12.45,15.05,"12.5",""],"NGC 4429":["Galaxy","Vir",12.458,11.12,"11.5",""],"NGC 4435":["Galaxy","Vir",12.462,13.08,"12.0",""],"NGC 4438":["Galaxy","Vir",12.463,13.02,"11.0",""],"NGC 4442":["Galaxy","Vir",12.468,9.82,"11.5",""],"NGC 4448":["Galaxy","Com",12.47,28.63,"12.0",""],"NGC 4450":["Galaxy","Com",12.477,17.1,"11.5",""],"NGC 4459":["Galaxy","Com",12.485,13.98,"12.0",""],"NGC 4473":["Galaxy","Com",12.498,13.43,"12.0",""],"NGC 4477":["Galaxy","Com",12.502,13.65,"11.5",""],"NGC 4478":["Galaxy","Vir",12.507,12.33,"12.5",""],"NGC 4485":["Galaxy","CVn",12.508,41.72,"13.0",""],"NGC 4490":["Galaxy","CVn",12.51,41.65,"11.0",""],"NGC 4494":["Galaxy","Com",12.522,25.78,"11.0",""],"NGC 4526":["Galaxy","Vir",12.568,7.72,"11.0",""],"NGC 4527":["Galaxy","Vir",12.57,2.67,"11.5",""],"NGC 4535":["Galaxy","Vir",12.573,8.22,"11.0",""],"NGC 4536":["Galaxy","Vir",12.575,2.2,"11.0",""],"NGC 4546":["Galaxy","Vir",12.592,-3.78,"12.0",""],"NGC 4550":["Galaxy","Vir",12.593,12.23,"12.5",""],"NGC 4570":["Galaxy","Vir",12.615,7.25,"12.0",""],"NGC 4596":["Galaxy","Vir",12.667,10.18,"12.0",""],"NGC 4618":["Galaxy","CVn",12.692,41.17,"11.5",""],"NGC 4636":["Galaxy","Vir",12.715,2.7,"11.0",""],"NGC 4643":["Galaxy","Vir",12.723,1.98,"12.0",""],"NGC 4654":["Galaxy","Vir",12.733,13.13,"11.5",""],"NGC 4656":["Galaxy","CVn",12.732,32.18,"11.0",""],"NGC 4660":["Galaxy","Vir",12.743,11.2,"12.5",""],"NGC 4665":["Galaxy","Vir",12.753,3.07,"11.5",""],"NGC 4666":["Galaxy","Vir",12.753,-0.45,"11.5",""],"NGC 4689":["Galaxy","Com",12.798,13.77,"12.0",""],"NGC 4698":["Galaxy","Vir",12.808,8.5,"12.0",""],"NGC 4699":["Galaxy","Vir",12.818,-8.67,"11.0",""],"NGC 4725":["Galaxy","Com",12.84,25.55,"10.0",""],"NGC 4753":["Galaxy","Vir",12.873,-1.2,"11.0",""],"NGC 4754":["Galaxy","Vir",12.873,11.32,"12.0",""],"NGC 4762":["Galaxy","Vir",12.883,11.23,"11.5",""],"NGC 4781":["Galaxy","Vir",12.907,-10.53,"12.0",""],"NGC 4800":["Galaxy","CVn",12.908,46.53,"13.0",""],"NGC 4845":["Galaxy","Vir",12.968,1.58,"12.5",""],"NGC 4856":["Galaxy","Vir",12.988,-15.03,"11.5",""],"NGC 4866":["Galaxy","Vir",12.99,14.17,"12.0",""],"NGC 4900":["Galaxy","Vir",13.012,2.5,"12.0",""],"NGC 4958":["Galaxy","Vir",13.095,-8.02,"12.0",""],"NGC 4995":["Galaxy","Vir",13.16,-7.83,"12.0",""],"NGC 5033":["Galaxy","Cvn",13.225,36.6,"10.5",""],"NGC 5054":["Galaxy","Vir",13.282,-16.65,"11.5",""],"NGC 5195":["Galaxy","CVn",13.502,47.27,"11.5",""],"NGC 5273":["Galaxy","Cvn",13.702,35.63,"12.5",""],"NGC 5322":["Galaxy","UMa",13.82,60.2,"11.5",""],"NGC 5363":["Galaxy","Vir",13.937,5.27,"11.5",""],"NGC 5364":["Galaxy","Vir",13.938,5.03,"11.0",""],"NGC 5466":["Globular cluster","Boo",14.092,28.53,"10.5",""],"NGC 5473":["Galaxy","UMa",14.08,54.9,"13.0",""],"NGC 5474":["Galaxy","UMa",14.085,53.67,"11.5",""],"NGC 5557":["Galaxy","Boo",14.305,36.48,"13.0",""],"NGC 5566":["Galaxy","Vir",14.34,3.93,"11.5",""],"NGC 5576":["Galaxy","Vir",14.352,3.27,"12.0",""],"NGC 5631":["Galaxy","Uma",14.443,56.57,"12.5",""],"NGC 5634":["Globular cluster","Vir",14.493,-5.98,"11.0",""],"NGC 5676":["Galaxy","Boo",14.547,49.45,"12.0",""],"NGC 5689":["Galaxy","Boo",14.592,48.73,"12.5",""],"NGC 5746":["Galaxy","Vir",14.75,1.82,"11.5",""],"NGC 5846":["Galaxy","Vir",15.108,1.6,"11.5",""],"NGC 5897":["Globular cluster","Lib",15.29,-21.02,"9.5",""],"NGC 5907":["Galaxy","Dra",15.265,56.32,"11.5",""],"NGC 5982":["Galaxy","Dra",15.643,59.35,"12.5",""],"NGC 6118":["Galaxy","Ser",16.365,-2.28,"12.0",""],"NGC 6144":["Globular cluster","Sco",16.455,-26.03,"11.0",""],"NGC 6207":["Galaxy","Her",16.718,36.83,"12.5",""],"NGC 6217":["Galaxy","UMi",16.543,78.2,"12.5",""],"NGC 6229":["Globular cluster","Her",16.783,47.53,"10.5",""],"NGC 6235":["Globular cluster","Oph",16.89,-22.18,"11.0",""],"NGC 6284":["Globular cluster","Oph",17.075,-24.77,"10.5",""],"NGC 6287":["Globular cluster","Oph",17.087,-22.7,"11.0",""],"NGC 6293":["Globular cluster","Oph",17.17,-26.58,"9.5",""],"NGC 6304":["Globular cluster","Oph",17.242,-29.47,"10.0",""],"NGC 6316":["Globular cluster","Oph",17.277,-28.13,"10.0",""],"NGC 6342":["Globular cluster","Oph",17.353,-19.58,"11.5",""],"NGC 6355":["Globular cluster","Oph",17.4,-26.35,"9.5",""],"NGC 6356":["Globular cluster","Oph",17.393,-17.82,"9.5",""],"NGC 6369":["Planetary nebula","Oph",17.488,-23.77,"14.0",""],"NGC 6401":["Globular cluster","Oph",17.643,-23.92,"",""],"NGC 6426":["Globular cluster","Oph",17.728,3.0,"12.5",""],"NGC 6440":["Globular cluster","Sgr",17.815,-20.37,"12.0",""],"NGC 6445":["Planetary nebula","Sgr",17.82,-20.02,"13.0",""],"NGC 6451":["Open cluster","Sco",17.845,-30.22,"8.5",""],"NGC 6517":["Globular cluster","Oph",18.03,-8.97,"13.0",""],"NGC 6520":["Open cluster","Sgr",18.057,-27.9,"7.5",""],"NGC 6522":["Globular cluster","Sgr",18.06,-30.03,"10.5",""],"NGC 6528":["Globular cluster","Sgr",18.08,-30.05,"11.0",""],"NGC 6540":["Open cluster","Sgr",18.105,-27.82,"14.5",""],"NGC 6544":["Globular cluster","Sgr",18.122,-25.0,"",""],"NGC 6553":["Globular cluster","Sgr",18.155,-25.9,"10.0",""],"NGC 6568":["Open cluster","Sgr",18.213,-21.6,"8.5",""],"NGC 6569":["Globular cluster","Sgr",18.227,-31.83,"10.5",""],"NGC 6583":["Open cluster","Sgr",18.263,-22.13,"12.0",""],"NGC 6624":["Globular cluster","Sgr",18.395,-30.37,"9.5",""],"NGC 6629":["Planetary nebula","Sgr",18.428,-23.2,"12.0",""],"NGC 6633":["Open cluster","Oph",18.462,6.57,"5.5",""],"NGC 6638":["Globular cluster","Sgr",18.515,-25.5,"10.0",""],"NGC 6642":["Globular cluster","Sgr",18.532,-23.48,"10.5",""],"NGC 6645":["Open cluster","Sgr",18.543,-16.9,"8.5",""],"NGC 6664":["Open cluster","Sct",18.612,-8.22,"9.0",""],"NGC 6712":["Globular cluster","Sct",18.885,-8.7,"10.0",""],"NGC 6755":["Open cluster","Aql",19.13,4.23,"9.0",""],"NGC 6756":["Open cluster","Aql",19.145,4.68,"10.5",""],"NGC 6781":["Planetary nebula","Aql",19.308,6.53,"12.5",""],"NGC 6802":["Open cluster","Vul",19.51,20.27,"12.0",""],"NGC 6818":["Planetary nebula","Sgr",19.733,-14.15,"10.0",""],"NGC 6823":["Cluster + nebula","Vul",19.718,23.3,"10.0",""],"NGC 6830":["Open cluster","Vul",19.85,23.07,"9.0",""],"NGC 6834":["Open cluster","Cyg",19.87,29.42,"10.0",""],"NGC 6866":["Open cluster","Cyg",20.062,44.0,"9.0",""],"NGC 6882":["Open cluster","Vul",20.195,26.55,"5.5",""],"NGC 6905":["Planetary nebula","Del",20.373,20.1,"12.0",""],"NGC 6910":["Open cluster","Cyg",20.385,40.78,"7.5",""],"NGC 6939":["Open cluster","Cep",20.523,60.63,"10.0",""],"NGC 6940":["Open cluster","Vul",20.577,28.3,"6.5",""],"NGC 7008":["Planetary nebula","Cyg",21.01,54.55,"13.5",""],"NGC 7044":["Open cluster","Cyg",21.215,42.48,"11.5",""],"NGC 7062":["Open cluster","Cyg",21.387,46.38,"11.5",""],"NGC 7086":["Open cluster","Cyg",21.508,51.58,"11.5",""],"NGC 7128":["Open cluster","Cyg",21.733,53.72,"11.5",""],"NGC 7142":["Open cluster","Cep",21.765,65.8,"10.0",""],"NGC 7160":["Open cluster","Cep",21.895,62.6,"6.5",""],"NGC 7209":["Open cluster","Lac",22.087,46.5,"8.0",""],"NGC 7217":["Galaxy","Peg",22.13,31.35,"11.5",""],"NGC 7296":["Open cluster","Lac",22.47,52.28,"9.5",""],"NGC 7380":["Cluster + nebula","Cep",22.783,58.1,"9.0",""],"NGC 7448":["Galaxy","Peg",23.0,15.98,"12.5",""],"NGC 7510":["Open cluster","Cep",23.192,60.57,"9.5",""],"NGC 7606":["Galaxy","Aqr",23.318,-8.5,"11.5",""],"NGC 7686":["Open cluster","And",23.503,49.13,"8.0",""],"NGC 7723":["Galaxy","Aqr",23.65,-12.97,"12.0",""],"NGC 7727":["Galaxy","Aqr",23.665,-12.3,"11.5",""],"NGC 7789":["Open cluster","Cas",23.95,56.73,"9.5",""],"NGC 7790":["Open cluster","Cas",23.973,61.22,"7.0",""]},"mes":[[1,"NGC 1952"],[2,"NGC 7089"],[3,"NGC 5272"],[4,"NGC 6121"],[5,"NGC 5904"],[6,"NGC 6405"],[7,"NGC 6475"],[8,"NGC 6523"],[9,"NGC 6333"],[10,"NGC 6254"],[11,"NGC 6705"],[12,"NGC 6218"],[13,"NGC 6205"],[14,"NGC 6402"],[15,"NGC 7078"],[16,"NGC 6611"],[17,"NGC 6618"],[18,"NGC 6613"],[19,"NGC 6273"],[20,"NGC 6514"],[21,"NGC 6531"],[22,"NGC 6656"],[23,"NGC 6494"],[24,"M24"],[25,"IC 4725"],[26,"NGC 6694"],[27,"NGC 6853"],[28,"NGC 6626"],[29,"NGC 6913"],[30,"NGC 7099"],[31,"NGC 224"],[32,"NGC 221"],[33,"NGC 598"],[34,"NGC 1039"],[35,"NGC 2168"],[36,"NGC 1960"],[37,"NGC 2099"],[38,"NGC 1912"],[39,"NGC 7092"],[40,"M40"],[41,"NGC 2287"],[42,"NGC 1976"],[43,"NGC 1982"],[44,"NGC 2632"],[45,"M45"],[46,"NGC 2437"],[47,"NGC 2422"],[48,"NGC 2548"],[49,"NGC 4472"],[50,"NGC 2323"],[51,"NGC 5194"],[52,"NGC 7654"],[53,"NGC 5024"],[54,"NGC 6715"],[55,"NGC 6809"],[56,"NGC 6779"],[57,"NGC 6720"],[58,"NGC 4579"],[59,"NGC 4621"],[60,"NGC 4649"],[61,"NGC 4303"],[62,"NGC 6266"],[63,"NGC 5055"],[64,"NGC 4826"],[65,"NGC 3623"],[66,"NGC 3627"],[67,"NGC 2682"],[68,"NGC 4590"],[69,"NGC 6637"],[70,"NGC 6681"],[71,"NGC 6838"],[72,"NGC 6981"],[73,"NGC 6994"],[74,"NGC 628"],[75,"NGC 6864"],[76,"NGC 650"],[77,"NGC 1068"],[78,"NGC 2068"],[79,"NGC 1904"],[80,"NGC 6093"],[81,"NGC 3031"],[82,"NGC 3034"],[83,"NGC 5236"],[84,"NGC 4374"],[85,"NGC 4382"],[86,"NGC 4406"],[87,"NGC 4486"],[88,"NGC 4501"],[89,"NGC 4552"],[90,"NGC 4569"],[91,"NGC 4548"],[92,"NGC 6341"],[93,"NGC 2447"],[94,"NGC 4736"],[95,"NGC 3351"],[96,"NGC 3368"],[97,"NGC 3587"],[98,"NGC 4192"],[99,"NGC 4254"],[100,"NGC 4321"],[101,"NGC 5457"],[102,"NGC 5866"],[103,"NGC 581"],[104,"NGC 4594"],[105,"NGC 3379"],[106,"NGC 4258"],[107,"NGC 6171"],[108,"NGC 3556"],[109,"NGC 3992"],[110,"NGC 205"]],"cal":[[1,"NGC 188",""],[2,"NGC 40",""],[3,"NGC 4236",""],[4,"NGC 7023",""],[5,"IC 342",""],[6,"NGC 6543",""],[7,"NGC 2403",""],[8,"NGC 559",""],[9,"Sh2-155",""],[10,"NGC 663",""],[11,"NGC 7635",""],[12,"NGC 6946",""],[13,"NGC 457",""],[14,"C14","NGC 869 + 884"],[15,"NGC 6826",""],[16,"NGC 7243",""],[17,"NGC 147",""],[18,"NGC 185",""],[19,"IC 5146",""],[20,"NGC 7000",""],[21,"NGC 4449",""],[22,"NGC 7662",""],[23,"NGC 891",""],[24,"NGC 1275",""],[25,"NGC 2419",""],[26,"NGC 4244",""],[27,"NGC 6888",""],[28,"NGC 752",""],[29,"NGC 5005",""],[30,"NGC 7331",""],[31,"IC 405",""],[32,"NGC 4631",""],[33,"C33","NGC 6992/5"],[34,"NGC 6960",""],[35,"NGC 4889",""],[36,"NGC 4559",""],[37,"NGC 6885",""],[38,"NGC 4565",""],[39,"NGC 2392",""],[40,"NGC 3626",""],[41,"C41","Hyades"],[42,"NGC 7006",""],[43,"NGC 7814",""],[44,"NGC 7479",""],[45,"NGC 5248",""],[46,"NGC 2261",""],[47,"NGC 6934",""],[48,"NGC 2775",""],[49,"C49","NGC 2237-9"],[50,"NGC 2244",""],[51,"IC 1613",""],[52,"NGC 4697",""],[53,"NGC 3115",""],[54,"NGC 2506",""],[55,"NGC 7009",""],[56,"NGC 246",""],[57,"NGC 6822",""],[58,"NGC 2360",""],[59,"NGC 3242",""],[60,"NGC 4038",""],[61,"NGC 4039",""],[62,"NGC 247",""],[63,"NGC 7293",""],[64,"NGC 2362",""],[65,"NGC 253",""],[66,"NGC 5694",""],[67,"NGC 1097",""],[68,"NGC 6729",""],[69,"NGC 6302",""],[70,"NGC 300",""],[71,"NGC 2477",""],[72,"NGC 55",""],[73,"NGC 1851",""],[74,"NGC 3132",""],[75,"NGC 6124",""],[76,"NGC 6231",""],[77,"NGC 5128",""],[78,"NGC 6541",""],[79,"NGC 3201",""],[80,"NGC 5139",""],[81,"NGC 6352",""],[82,"NGC 6193",""],[83,"NGC 4945",""],[84,"NGC 5286",""],[85,"IC 2391",""],[86,"NGC 6397",""],[87,"NGC 1261",""],[88,"NGC 5823",""],[89,"NGC 6087",""],[90,"NGC 2867",""],[91,"NGC 3532",""],[92,"NGC 3372",""],[93,"NGC 6752",""],[94,"NGC 4755",""],[95,"NGC 6025",""],[96,"NGC 2516",""],[97,"NGC 3766",""],[98,"NGC 4609",""],[99,"C99","Coalsack"],[100,"IC 2944",""],[101,"NGC 6744",""],[102,"IC 2602",""],[103,"NGC 2070",""],[104,"NGC 362",""],[105,"NGC 4833",""],[106,"NGC 104",""],[107,"NGC 6101",""],[108,"NGC 4372",""],[109,"NGC 3195",""]],"h400":["NGC 40","NGC 129","NGC 136","NGC 157","NGC 185","NGC 205","NGC 225","NGC 246","NGC 247","NGC 253","NGC 278","NGC 288","NGC 381","NGC 404","NGC 436","NGC 457","NGC 488","NGC 524","NGC 559","NGC 584","NGC 596","NGC 598","NGC 613","NGC 615","NGC 637","NGC 651","NGC 654","NGC 659","NGC 663","NGC 720","NGC 752","NGC 772","NGC 779","NGC 869","NGC 884","NGC 891","NGC 908","NGC 936","NGC 1022","NGC 1023","NGC 1027","NGC 1052","NGC 1055","NGC 1084","NGC 1245","NGC 1342","NGC 1407","NGC 1444","NGC 1501","NGC 1502","NGC 1513","NGC 1528","NGC 1535","NGC 1545","NGC 1647","NGC 1664","NGC 1788","NGC 1817","NGC 1857","NGC 1907","NGC 1931","NGC 1961","NGC 1964","NGC 1980","NGC 1999","NGC 2022","NGC 2024","NGC 2126","NGC 2129","NGC 2158","NGC 2169","NGC 2185","NGC 2186","NGC 2194","NGC 2204","NGC 2215","NGC 2232","NGC 2244","NGC 2251","NGC 2264","NGC 2266","NGC 2281","NGC 2286","NGC 2301","NGC 2304","NGC 2311","NGC 2324","NGC 2335","NGC 2343","NGC 2353","NGC 2354","NGC 2355","NGC 2360","NGC 2362","NGC 2371","NGC 2372","NGC 2392","NGC 2395","NGC 2403","NGC 2419","NGC 2420","NGC 2421","NGC 2422","NGC 2423","NGC 2438","NGC 2440","NGC 2479","NGC 2482","NGC 2489","NGC 2506","NGC 2509","NGC 2527","NGC 2539","NGC 2548","NGC 2567","NGC 2571","NGC 2613","NGC 2627","NGC 2655","NGC 2681","NGC 2683","NGC 2742","NGC 2768","NGC 2775","NGC 2782","NGC 2787","NGC 2811","NGC 2841","NGC 2859","NGC 2903","NGC 2950","NGC 2964","NGC 2974","NGC 2976","NGC 2985","NGC 3034","NGC 3077","NGC 3079","NGC 3115","NGC 3147","NGC 3166","NGC 3169","NGC 3184","NGC 3190","NGC 3193","NGC 3198","NGC 3226","NGC 3227","NGC 3242","NGC 3245","NGC 3277","NGC 3294","NGC 3310","NGC 3344","NGC 3377","NGC 3379","NGC 3384","NGC 3395","NGC 3412","NGC 3414","NGC 3432","NGC 3486","NGC 3489","NGC 3504","NGC 3521","NGC 3556","NGC 3593","NGC 3607","NGC 3608","NGC 3610","NGC 3613","NGC 3619","NGC 3621","NGC 3626","NGC 3628","NGC 3631","NGC 3640","NGC 3655","NGC 3665","NGC 3675","NGC 3686","NGC 3726","NGC 3729","NGC 3810","NGC 3813","NGC 3877","NGC 3893","NGC 3898","NGC 3900","NGC 3912","NGC 3938","NGC 3941","NGC 3945","NGC 3949","NGC 3953","NGC 3962","NGC 3982","NGC 3992","NGC 3998","NGC 4026","NGC 4027","NGC 4030","NGC 4036","NGC 4038","NGC 4041","NGC 4051","NGC 4085","NGC 4088","NGC 4102","NGC 4111","NGC 4143","NGC 4147","NGC 4150","NGC 4151","NGC 4179","NGC 4203","NGC 4214","NGC 4216","NGC 4245","NGC 4251","NGC 4258","NGC 4261","NGC 4273","NGC 4274","NGC 4278","NGC 4281","NGC 4293","NGC 4303","NGC 4314","NGC 4346","NGC 4350","NGC 4361","NGC 4365","NGC 4371","NGC 4394","NGC 4414","NGC 4419","NGC 4429","NGC 4435","NGC 4438","NGC 4442","NGC 4448","NGC 4449","NGC 4450","NGC 4459","NGC 4473","NGC 4477","NGC 4478","NGC 4485","NGC 4490","NGC 4494","NGC 4526","NGC 4527","NGC 4535","NGC 4536","NGC 4546","NGC 4548","NGC 4550","NGC 4559","NGC 4565","NGC 4570","NGC 4594","NGC 4596","NGC 4618","NGC 4631","NGC 4636","NGC 4643","NGC 4654","NGC 4656","NGC 4660","NGC 4665","NGC 4666","NGC 4689","NGC 4697","NGC 4698","NGC 4699","NGC 4725","NGC 4753","NGC 4754","NGC 4762","NGC 4781","NGC 4800","NGC 4845","NGC 4856","NGC 4866","NGC 4900","NGC 4958","NGC 4995","NGC 5005","NGC 5033","NGC 5054","NGC 5195","NGC 5248","NGC 5273","NGC 5322","NGC 5363","NGC 5364","NGC 5466","NGC 5473","NGC 5474","NGC 5557","NGC 5566","NGC 5576","NGC 5631","NGC 5634","NGC 5676","NGC 5689","NGC 5694","NGC 5746","NGC 5846","NGC 5866","NGC 5897","NGC 5907","NGC 5982","NGC 6118","NGC 6144","NGC 6171","NGC 6207","NGC 6217","NGC 6229","NGC 6235","NGC 6284","NGC 6287","NGC 6293","NGC 6304","NGC 6316","NGC 6342","NGC 6355","NGC 6356","NGC 6369","NGC 6401","NGC 6426","NGC 6440","NGC 6445","NGC 6451","NGC 6514","NGC 6517","NGC 6520","NGC 6522","NGC 6528","NGC 6540","NGC 6543","NGC 6544","NGC 6553","NGC 6568","NGC 6569","NGC 6583","NGC 6624","NGC 6629","NGC 6633","NGC 6638","NGC 6642","NGC 6645","NGC 6664","NGC 6712","NGC 6755","NGC 6756","NGC 6781","NGC 6802","NGC 6818","NGC 6823","NGC 6826","NGC 6830","NGC 6834","NGC 6866","NGC 6882","NGC 6885","NGC 6905","NGC 6910","NGC 6934","NGC 6939","NGC 6940","NGC 6946","NGC 7000","NGC 7006","NGC 7008","NGC 7009","NGC 7044","NGC 7062","NGC 7086","NGC 7128","NGC 7142","NGC 7160","NGC 7209","NGC 7217","NGC 7243","NGC 7296","NGC 7331","NGC 7380","NGC 7448","NGC 7479","NGC 7510","NGC 7606","NGC 7662","NGC 7686","NGC 7723","NGC 7727","NGC 7789","NGC 7790","NGC 7814"],"notes":["M1 type: AL list says planetary nebula; it is a supernova remnant (fixed 11-24)","M24: AL list gives NGC 6603 (mag 11.5); app uses the star cloud itself, 18h16.9m -18d29m, mag ~4.6 (fixed 11-24)","M40 position: Winnecke 4 at 12h22.2m +58d05m (AL list had +58d22m) (fixed 11-24)","C20 spelling, C48 constellation Can->Cnc (fixed 11-24)"]};
+var OBJ = CAT.objs;   // key -> [type, constellation, RA hours, Dec degrees, mag, name]
+OBJ['NGC 1750'] = ['Open cluster','Tau',5.065,23.65,'',''];
+var PROGS = [
+  {id:'mes', name:'Messier', kind:'scope', pro:false, levels:[[70,'Silver'],[110,'Gold']],
+   req:['when','where','see','tr','ap','pw','d'], url:'https://www.astroleague.org/messier-observing-program/',
+   items: CAT.mes.map(function(r){ return {lab:'M'+r[0], k:r[1]}; })},
+  {id:'bmes', name:'Binocular Messier', kind:'bino', pro:false, levels:[[50,'the certificate']],
+   req:['when','where','see','tr','ap','pw'], url:'https://www.astroleague.org/binocular-messier-observing-program/',
+   items: CAT.mes.map(function(r){ return {lab:'M'+r[0], k:r[1]}; })},
+  {id:'cal', name:'Caldwell', kind:'', pro:true, levels:[[70,'the first certificate'],[109,'the full list']],
+   req:['when','where','see','tr','ap','pw','dsk'], url:'https://www.astroleague.org/caldwell-observing-program-introduction/',
+   items: CAT.cal.map(function(r){ return {lab:'C'+r[0], k:r[1], alias:r[2]}; })},
+  {id:'h400', name:'Herschel 400', kind:'', pro:true, levels:[[400,'the certificate']],
+   req:['when','where','see','tr','ap','pw','d'], url:'https://www.astroleague.org/herschel-400-observing-program/',
+   items: CAT.h400.map(function(k){ return {lab:k, k:k}; })}
+];
+/* the same object under another number counts for every list that has it:
+   NGC 7814 / NGC 1750 (AL website list vs manual), M76 = NGC 650 / H400 NGC 651, the Double Cluster C14 = NGC 869 + NGC 884 */
+var SAME = {'NGC 7814':['NGC 1750'], 'NGC 650':['NGC 651'], 'NGC 651':['NGC 650'], 'C14':['NGC 869','NGC 884'], 'NGC 869':['C14'], 'NGC 884':['C14']};
+PROGS.forEach(function(p){ p.items.forEach(function(it){ it.keys = [it.k].concat(SAME[it.k] || []); }); });
+function onList(p, k){ return p.items.some(function(it){ return it.keys.indexOf(k) >= 0; }); }
+function itemOf(p, k){ return p.items.filter(function(it){ return it.keys.indexOf(k) >= 0; })[0] || null; }
+/* extra words the search should find */
+var FIND = {'C14':['869','884','ngc869','ngc884','doublecluster','handchi','hhchi'], 'C49':['2237','2238','2239','2244','ngc2237','ngc2238','ngc2239','ngc2244'], 'C33':['6992','6995','ngc6992','ngc6995','veilnebula','eastveil'], 'C34':['veilnebula','westveil'], 'NGC 650':['651','ngc651'], 'NGC 651':['650','ngc650','littledumbbell'], 'C41':['hyades'], 'C99':['coalsack'], 'C9':['sh2155','cavenebula']};
+var PBY = {}; PROGS.forEach(function(p){ PBY[p.id] = p; });
+var REQ_TEXT = {when:'date and time', where:'latitude and longitude', see:'seeing', tr:'transparency', ap:'aperture', inst:'instrument', pw:'power', d:'description', dsk:'description or sketch'};
+var RULES = {
+  mes:'Date and time (local or UT), latitude and longitude, seeing and transparency, telescope aperture, power, and a description of the object in the eyepiece. A telescope, not binoculars. 70 for Silver, all 110 for Gold.',
+  bmes:'Object, date and time, latitude and longitude, seeing and transparency, size and power of the binoculars. A short description is suggested. Any 50 of the 110. Observations can’t be reused for the telescope Messier program.',
+  cal:'The fields on the League’s Observation Log Sheet (date, time, latitude and longitude, seeing, transparency, instrument and aperture, magnification), plus a description or a drawing. Any telescope or binoculars; no GoTo. 70 objects, then all 109.',
+  h400:'Object, date and time (local or UT), latitude and longitude, seeing and transparency, a description of every object, and the instrument and its power (this app asks for the aperture as the instrument). All 400.'
+};
+/* label(s) for every object: M31 / NGC 224 / C14 ... */
+var LABELS = {};
+function addLab(k, l){ (LABELS[k] = LABELS[k] || []).indexOf(l) < 0 && LABELS[k].push(l); }
+CAT.mes.forEach(function(r){ addLab(r[1], 'M'+r[0]); });
+CAT.cal.forEach(function(r){ addLab(r[1], 'C'+r[0]); });
+Object.keys(OBJ).forEach(function(k){ if(/^(NGC|IC|Sh2)/.test(k)) addLab(k, k); });
+function mainLab(k){ return (LABELS[k] || [k])[0]; }
+function fullLab(k){ var o = OBJ[k], ls = (LABELS[k] || [k]).slice(); if(k==='NGC 1750') ls = ['NGC 1750']; var al = calAlias(k); if(al) ls.push(al); return ls.join(' · ') + (o && o[5] ? ' · ' + o[5] : ''); }
+function calAlias(k){ for(var i=0;i<CAT.cal.length;i++) if(CAT.cal[i][1]===k && CAT.cal[i][2]) return CAT.cal[i][2]; return ''; }
+function listsOf(k){ var out = []; PROGS.forEach(function(p){ if(p.id!=='bmes' && onList(p, k)) out.push(p.name); }); return out; }
+
+/* ---------- helpers ---------- */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function lsGet(k, d){ try{ var v = localStorage.getItem(k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } }
+function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); return true; }catch(e){ return false; } }
+function say(t){ var l = $('live'); l.textContent = ''; setTimeout(function(){ l.textContent = t; }, 30); }
+function pad(n){ return (n<10?'0':'') + n; }
+function today(){ var d = new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function nowTime(){ var d = new Date(); return pad(d.getHours())+':'+pad(d.getMinutes()); }
+function numOr(v){ var s = String(v==null?'':v).trim().replace(',', '.'); if(s==='') return null; var n = parseFloat(s); return isFinite(n) ? n : null; }
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function blank(){ return {v:1, obs:[], del:[], orph:[], free:{cal:[], h400:[]}, ev:{}, last:{}, prog:'mes', name:'', club:'', addr:'', email:'', phone:'', sendTo:'me', prOff:true, prTodo:false, prDone:false, backupAt:0, visitAt:0, started:0}; }
+function str(v, n){ return typeof v==='string' ? v.slice(0, n||4000) : (typeof v==='number' ? String(v) : ''); }
+function coord(v, lim){ var n = typeof v==='number' ? v : numOr(v); return n!=null && Math.abs(n) <= lim ? n : null; }
+function lvl(v){ v = Math.round(+v); return v>=1 && v<=5 ? v : 0; }
+function normGear(g){ g = g && typeof g==='object' ? g : {}; return {kind: g.kind==='bino' ? 'bino' : (g.kind==='scope' ? 'scope' : ''), ap:str(g.ap,40), name:str(g.name,60)}; }
+function normObs(o){
+  return Object.assign({}, o, {id:str(o.id,40), k:o.k, date:/^\d{4}-\d\d-\d\d$/.test(o.date) ? o.date : '', time:/^\d\d:\d\d$/.test(o.time) ? o.time : '',
+    lat:coord(o.lat,90), lon:coord(o.lon,180), see:lvl(o.see), tr:lvl(o.tr), g:normGear(o.g), pw:str(o.pw,40), d:str(o.d,20000), sk:!!o.sk,
+    ts:typeof o.ts==='number' ? o.ts : 0, zone:str(o.zone,60), edited:typeof o.edited==='number' ? o.edited : 0});
+}
+function normLast(l){ l = l && typeof l==='object' ? l : {}; var lat = coord(l.lat,90), lon = coord(l.lon,180); return {lat: lon==null ? null : lat, lon: lat==null ? null : lon, see:lvl(l.see), tr:lvl(l.tr), g: l.g ? normGear(l.g) : null, pw:str(l.pw,40)}; }
+function clean(s){
+  var b = blank(); if(!s || typeof s!=='object') return b;
+  Object.keys(s).forEach(function(k){ if(!b.hasOwnProperty(k)) b[k] = s[k]; });   /* fields a newer version added survive an older open tab */
+  Object.keys(b).forEach(function(k){ if(s[k]!=null && typeof s[k]===typeof b[k]) b[k] = s[k]; });
+  var all = Array.isArray(s.obs) ? s.obs.filter(function(o){ return o && typeof o==='object' && typeof o.id==='string' && typeof o.k==='string'; }) : [];
+  b.obs = all.filter(function(o){ return OBJ.hasOwnProperty(o.k); }).map(normObs);
+  /* entries for objects this version doesn't know are kept aside, never thrown away */
+  b.orph = all.filter(function(o){ return !OBJ.hasOwnProperty(o.k); }).concat(Array.isArray(s.orph) ? s.orph : []).slice(0, 5000);
+  b.del = Array.isArray(s.del) ? s.del.filter(function(x){ return x && typeof x.id==='string' && typeof x.at==='number'; }).slice(-5000) : [];
+  b.ev = s.ev && typeof s.ev==='object' && !Array.isArray(s.ev) ? s.ev : {};
+  var fr = s.free && typeof s.free==='object' ? s.free : {};
+  b.free = {cal: Array.isArray(fr.cal) ? fr.cal.filter(function(k){ return typeof k==='string'; }) : [], h400: Array.isArray(fr.h400) ? fr.h400.filter(function(k){ return typeof k==='string'; }) : []};
+  b.last = normLast(b.last);
+  if(!PBY.hasOwnProperty(b.prog)) b.prog = 'mes';
+  if(['me','society'].indexOf(b.sendTo) < 0) b.sendTo = 'me';
+  fillFree(b);
+  return b;
+}
+/* Caldwell / Herschel 400 free slots: the first FREE_N objects ever logged on each list keep their slot for good
+   (deleting or editing an entry never moves a slot to another object) */
+function fillFree(st){
+  PROGS.forEach(function(p){
+    if(!p.pro) return;
+    var fr = st.free[p.id];
+    st.obs.slice().sort(function(a,b){ return (a.ts||0) - (b.ts||0); }).forEach(function(o){
+      var it = itemOf(p, o.k); if(it && fr.length < FREE_N && fr.indexOf(it.k) < 0) fr.push(it.k);
+    });
+  });
+}
+
+/* ---------- measurement: GoatCounter events; ?via= source code follows the visitor to the buy click ---------- */
+var FRESH_VIA = false;   /* true only on the first page of a visit that arrived with this ?via= (reloads don't count again) */
+var SRC = (function(){ try{
+  var q = new URLSearchParams(location.search), v = (q.get('via') || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20) || (q.get('a') ? 'aff' : '');
+  if(v){ if(sessionStorage.getItem('olog.src') !== v) FRESH_VIA = true; sessionStorage.setItem('olog.src', v); return v; }
+  return sessionStorage.getItem('olog.src') || '';
+}catch(e){ return ''; } })();
+var FUNNEL_EV = {'example':1, 'tool-start':1, 'obs-saved':1, 'obs-5':1, 'return-visit':1, 'returned':1, 'print':1, 'csv':1, 'backup':1, 'pro-view':1, 'pro-wall':1, 'buy-click':1, 'pro-unlocked':1, 'pro-gift':1};
+var ONCE = {};
+function track(name, tries){
+  try{
+    if(!tries && SRC && FUNNEL_EV[name]) track(name + '.' + SRC);
+    if(window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: name, title: name, event: true});
+    else if(GC_CODE && (tries||0) < 20) setTimeout(function(){ track(name, (tries||0) + 1); }, 500);
+  }catch(e){}
+}
+function gcSend(path, tries){ try{ if(window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: path, title: path, event: true}); else if(GC_CODE && (tries||0) < 20) setTimeout(function(){ gcSend(path, (tries||0) + 1); }, 500); }catch(e){} }
+function trackOnce(name){ if(ONCE[name]) return; ONCE[name] = 1; track(name); }
+
+/* ---------- state ---------- */
+var UNREADABLE = false;
+(function(){ try{ var raw = localStorage.getItem(KEY); if(raw){ JSON.parse(raw); } }catch(e){
+  UNREADABLE = true;
+  try{ if(localStorage.getItem(KEY + '.unreadable') !== localStorage.getItem(KEY)) localStorage.setItem(KEY + '.unreadable', localStorage.getItem(KEY)); }catch(e2){}
+} })();
+var REAL = clean(lsGet(KEY, null));
+var S = REAL, EXAMPLE = false;
+function stamp(o){ return Math.max(o.edited||0, o.ts||0); }
+/* merge what another tab (or the installed app) saved into mine: newest version of each entry wins, deletions stick */
+function mergeDisk(mine){
+  var disk = clean(lsGet(KEY, null)), dead = {}, by = {};
+  mine.del.concat(disk.del).forEach(function(x){ dead[x.id] = Math.max(dead[x.id] || 0, x.at); });
+  disk.obs.concat(mine.obs).forEach(function(o){ if(dead[o.id] && stamp(o) <= dead[o.id]) return; var h = by[o.id]; if(!h || stamp(o) >= stamp(h)) by[o.id] = o; });
+  var ids = {}; mine.obs.forEach(function(o){ ids[o.id] = 1; });
+  mine.obs = mine.obs.filter(function(o){ return by[o.id]; }).map(function(o){ return by[o.id]; })
+    .concat(disk.obs.filter(function(o){ return !ids[o.id] && by[o.id]===o; }));
+  mine.del = Object.keys(dead).map(function(id){ return {id:id, at:dead[id]}; }).slice(-5000);
+  ['cal','h400'].forEach(function(id){ disk.free[id].forEach(function(k){ if(mine.free[id].indexOf(k) < 0) mine.free[id].push(k); }); });
+  Object.keys(disk.ev).forEach(function(k){ mine.ev[k] = mine.ev[k] || disk.ev[k]; });
+  if(!mine.started && disk.started) mine.started = disk.started;
+  if(disk.backupAt > mine.backupAt) mine.backupAt = disk.backupAt;
+  mine.orph = disk.orph.length > mine.orph.length ? disk.orph : mine.orph;
+}
+var SAVE_FAIL = false;
+function save(){
+  if(EXAMPLE) return;
+  mergeDisk(REAL); S = REAL; REAL.visitAt = Date.now();
+  var ok = lsSet(KEY, REAL);
+  if(ok !== SAVE_FAIL) return;
+  SAVE_FAIL = !ok; var w = $('saveWarn'); if(w) w.hidden = ok;
+}
+window.addEventListener('storage', function(e){
+  if(e.key!==KEY || EXAMPLE) return;
+  mergeDisk(REAL); S = REAL;
+  if(!$('dlgLog').open) renderAll();
+});
+var PRO = lsGet(PROKEY, null); if(!PRO || typeof PRO!=='object') PRO = {};
+function isPro(){ return (typeof PRO.email==='string' && PRO.email.indexOf('@') > 0) || (typeof PRO.gift==='string' && PRO.gift.length >= 12 && GIFT.some(function(h){ return h.indexOf(PRO.gift)===0; })); }
+function freeFor(p, k){ var it = itemOf(p, k); return !!it && S.free[p.id].indexOf(it.k) >= 0; }
+function freeLeft(p){ return FREE_N - S.free[p.id].length; }
+function isLocked(p, k){ return p.pro && !isPro() && onList(p, k) && !freeFor(p, k); }
+
+/* ---------- checks ---------- */
+function eligible(p, o){ return !(p.kind && o.g && o.g.kind && o.g.kind !== p.kind); }
+function missing(p, o){
+  var m = [], g = o.g || {};
+  p.req.forEach(function(r){
+    if(r==='when' && !(o.date && o.time)) m.push(r);
+    else if(r==='where' && (o.lat==null || o.lon==null)) m.push(r);
+    else if(r==='see' && !o.see) m.push(r);
+    else if(r==='tr' && !o.tr) m.push(r);
+    else if(r==='ap' && !g.ap) m.push(r);
+    else if(r==='inst' && !(g.ap || g.name)) m.push(r);
+    else if(r==='pw' && !String(o.pw||'').trim()) m.push(r);
+    else if(r==='d' && !String(o.d||'').trim()) m.push(r);
+    else if(r==='d' && words(o.d) < MIN_WORDS) m.push('dshort');
+    else if(r==='dsk' && !String(o.d||'').trim() && !o.sk) m.push(r);
+    else if(r==='dsk' && !o.sk && words(o.d) < MIN_WORDS) m.push('dshort');
+  });
+  if(p.kind && !g.kind) m.push('kind');
+  return m;
+}
+var MIN_WORDS = 5;   /* AL's descriptions guide asks for substantive descriptions; a word or two gets sent back */
+function words(t){ return String(t||'').trim().split(/\s+/).filter(function(w){ return /[a-z0-9]/i.test(w); }).length; }
+function missText(p, r){ if(r==='kind') return 'telescope or binoculars?'; if(r==='dshort') return 'description under ' + MIN_WORDS + ' words'; if(r==='ap' && p.kind==='bino') return 'binocular size'; return 'no ' + REQ_TEXT[r]; }
+function obsTime(o){ return (o.date||'') + 'T' + (o.time||''); }
+/* status of every item on a list: done / fix / todo / lock */
+function status(p){
+  var byK = {};
+  S.obs.forEach(function(o){ if(eligible(p, o)) (byK[o.k] = byK[o.k] || []).push(o); });
+  var rows = p.items.map(function(it, i){
+    var os = []; it.keys.forEach(function(k){ os = os.concat(byK[k] || []); });
+    var best = null, bm = null;
+    os.forEach(function(o){ var m = missing(p, o); if(!best || m.length < bm.length) { best = o; bm = m; } });
+    var first = os.reduce(function(a, o){ return !a || (o.ts||0) < a ? (o.ts||0) : a; }, 0);
+    return {it:it, i:i, obs:os, best:best, miss:bm || [], st: !best ? 'todo' : (bm.length ? 'fix' : 'done'), first:first};
+  });
+  if(p.pro && !isPro()) rows.forEach(function(r){ if(r.best && S.free[p.id].indexOf(r.it.k) < 0) r.st = 'lock'; });
+  return rows;
+}
+function tally(rows){ var c = {done:0, fix:0, todo:0, lock:0}; rows.forEach(function(r){ c[r.st]++; }); return c; }
+
+/* ---------- sky position (for "best placed") ---------- */
+function lstHours(date, lon){ var d = date.getTime()/86400000 + 2440587.5 - 2451545.0; var g = 18.697374558 + 24.06570982441908*d; return (((g + lon/15) % 24) + 24) % 24; }
+function altitude(k, lat, lst){ var o = OBJ[k]; if(!o) return -90; var r = Math.PI/180, ha = (lst - o[2]) * 15 * r, de = o[3]*r, la = lat*r; return Math.asin(Math.sin(de)*Math.sin(la) + Math.cos(de)*Math.cos(la)*Math.cos(ha)) / r; }
+var WHEN = 'auto';
+function whenDate(){
+  var d = new Date(), h = d.getHours();
+  if(WHEN==='now') return d;
+  var t = new Date(d); t.setSeconds(0,0);
+  var target = WHEN==='auto' ? ((h>=18 || h<6) ? null : 21) : {'21':21, '0':24, '3':27}[WHEN];
+  if(target==null) return d;
+  if(h<6) t.setDate(t.getDate()-1);
+  t.setDate(t.getDate() + Math.floor(target/24)); t.setHours(target % 24, 0, 0, 0);
+  return t;
+}
+
+/* ---------- render ---------- */
+function curProg(){ return PBY.hasOwnProperty(S.prog) ? PBY[S.prog] : PROGS[0]; }
+function renderTabs(){
+  $('tabs').innerHTML = PROGS.map(function(p){
+    var c = tally(status(p)), n = p.items.length;
+    return '<button class="tab" role="tab" type="button" data-prog="'+p.id+'" aria-selected="'+(p.id===S.prog)+'"><b>'+esc(p.name)+(p.pro && !isPro() ? ' <span aria-label="Pro">· Pro</span>' : '')+'</b><span>'+(c.done)+' / '+(p.id==='bmes' ? 50 : n)+(c.fix ? ' · '+c.fix+' to fix' : '')+'</span></button>';
+  }).join('');
+}
+function renderBoard(){
+  var p = curProg(), rows = status(p), c = tally(rows), n = p.items.length;
+  var logged = c.done + c.fix + c.lock;
+  $('counts').innerHTML = '<span><b>'+c.done+'</b>done</span><span><b>'+c.fix+'</b>to fix</span>' + (c.lock ? '<span><b>'+c.lock+'</b>locked</span>' : '') + '<span><b>'+(n - logged)+'</b>not seen</span>';
+  var lv = p.levels.filter(function(l){ return c.done < l[0]; })[0];
+  $('goal').textContent = lv ? ('Next: ' + lv[1] + ' at ' + lv[0] + ' objects. ' + (lv[0] - c.done) + ' more to go.') : ('Every level on ' + p.name + ' is done. Print it and send it in.');
+  var top = p.levels[p.levels.length-1][0];
+  $('bar').innerHTML = '<i style="width:'+Math.min(100, c.done/top*100)+'%"></i>' + p.levels.slice(0,-1).map(function(l){ return '<u style="left:'+(l[0]/top*100)+'%" title="'+esc(l[1])+'"></u>'; }).join('');
+  var pl = $('plate'); pl.className = 'plate' + (n > 200 ? ' dense' : '');
+  pl.innerHTML = rows.map(function(r){
+    var lab = r.it.lab, short = lab.replace(/^NGC /,'');
+    var t = lab + (OBJ[r.it.k][5] ? ', ' + OBJ[r.it.k][5] : '') + ': ' + ({done:'done', fix:'logged, missing ' + r.miss.map(function(x){ return missText(p,x).replace(/^no /,''); }).join(', '), todo:'not seen yet', lock:'logged, unlock to check'})[r.st];
+    return '<button type="button" class="cell '+r.st+'" data-k="'+esc(r.it.k)+'" title="'+esc(t)+'" aria-label="'+esc(t)+'">'+(n > 200 ? '' : esc(short))+'</button>';
+  }).join('');
+  $('lgLock').hidden = !c.lock;
+  // fix list
+  var fx = rows.filter(function(r){ return r.st==='fix'; });
+  $('fixList').innerHTML = fx.length ? fx.map(function(r){
+    return '<li><button type="button" data-edit="'+esc(r.best.id)+'"><span><span class="nm">'+esc(r.it.lab)+'</span> <span class="meta">'+esc(r.best.date||'no date')+'</span><span class="chips">'+r.miss.map(function(x){ return '<span class="chip">'+esc(missText(p,x))+'</span>'; }).join('')+'</span></span><span class="meta">Fix</span></button></li>';
+  }).join('') : '<li class="empty">'+(logged ? 'Nothing to fix. Every entry on this list has what the rules ask for.' : 'Entries you log on this list show up here if they miss a field.')+'</li>';
+  // to-do list, best placed
+  var ll = S.last || {}, todo = rows.filter(function(r){ return r.st==='todo'; });
+  $('when').innerHTML = [['auto','Tonight'],['now','Right now'],['21','9 pm'],['0','Midnight'],['3','3 am']].map(function(w){ return '<button type="button" data-when="'+w[0]+'" aria-pressed="'+(WHEN===w[0])+'">'+w[1]+'</button>'; }).join('');
+  var html = '';
+  if(ll.lat!=null && ll.lon!=null){
+    var lst = lstHours(whenDate(), ll.lon);
+    var up = todo.map(function(r){ return {r:r, a:altitude(r.it.k, ll.lat, lst)}; }).filter(function(x){ return x.a > 15; }).sort(function(a,b){ return b.a - a.a; });
+    html = up.slice(0, 12).map(function(x){ var o = OBJ[x.r.it.k]; return '<li><button type="button" data-log="'+esc(x.r.it.k)+'"><span><span class="nm">'+esc(x.r.it.lab)+'</span> '+esc(o[5] || o[0])+'</span><span class="meta">'+Math.round(x.a)+'° up · '+esc(o[1])+'</span></button></li>'; }).join('');
+    if(!up.length) html = '<li class="empty">'+(todo.length ? 'None of what’s left is more than 15° up then. Try another time.' : 'Nothing left on this list.')+'</li>';
+    else if(up.length > 12) html += '<li class="empty">'+(up.length-12)+' more are up. Tap the chart to pick any object.</li>';
+  } else {
+    html = '<li class="empty">Log one object with your latitude and longitude, and this list sorts what’s left by how high it is tonight.</li>';
+  }
+  $('todoList').innerHTML = html;
+  // lock box
+  var lb = '';
+  if(p.pro && !isPro()){
+    lb = '<div class="warn"><b>' + esc(p.name) + ' is a Pro list.</b> Your first ' + FREE_N + ' objects on it are checked and print for free. ' + (c.lock ? c.lock + ' more are logged and saved; unlock Pro to check and print them. ' : 'Everything you log is saved either way. ') + '<a href="#proSec" data-pro>See Pro</a></div>';
+  }
+  var since = EXAMPLE ? 0 : S.obs.filter(function(o){ return stamp(o) > (S.backupAt||0); }).length;
+  if(since >= 5) lb = '<div class="warn"><b>' + since + ' entries since your last backup.</b> Your log lives only in this browser. <button class="btn small" type="button" id="btnBackup2">Save backup file</button></div>' + lb;
+  if(UNREADABLE && !EXAMPLE) lb = '<div class="warn"><b>Your saved log on this device couldn\u2019t be read.</b> A copy of it is kept in this browser and nothing was deleted. If you have a backup file, open it below.</div>' + lb;
+  $('lockBox').innerHTML = lb;
+  // setup strip
+  var parts = [];
+  if(ll.lat!=null && ll.lon!=null) parts.push('<span class="mono">'+ll.lat.toFixed(2)+', '+ll.lon.toFixed(2)+'</span>');
+  if(ll.g && (ll.g.ap || ll.g.name)) parts.push('<span>'+esc([ll.g.ap, ll.g.kind==='bino' ? 'binoculars' : '', ll.g.name].filter(Boolean).join(' '))+'</span>');
+  if(ll.see) parts.push('<span>seeing '+ll.see+'/5</span>');
+  if(ll.tr) parts.push('<span>transparency '+ll.tr+'/5</span>');
+  $('setup').innerHTML = parts.length ? '<b>Next entry starts with</b>' + parts.join('') + '<button class="btn link" type="button" id="btnSetup">Change</button>' : '';
+}
+function renderPrint(){
+  var sel = $('prProg'), v = sel.value || S.prog;
+  sel.innerHTML = PROGS.map(function(p){ return '<option value="'+p.id+'"'+(p.id===v?' selected':'')+'>'+esc(p.name)+'</option>'; }).join('');
+  [['prName','name'],['prClub','club'],['prAddr','addr'],['prEmail','email'],['prPhone','phone'],['prSend','sendTo']].forEach(function(f){ var el = $(f[0]); if(document.activeElement !== el) el.value = S[f[1]] || (f[1]==='sendTo' ? 'me' : ''); });
+  $('prOff').checked = !!S.prOff; $('prTodo').checked = !!S.prTodo; $('prDone').checked = !!S.prDone;
+  var n = S.obs.length;
+  $('bkInfo').textContent = n ? (n + ' entr' + (n===1?'y':'ies') + ' on this device. ' + (S.backupAt ? 'Last backup: ' + new Date(S.backupAt).toLocaleDateString() + '.' : 'No backup saved yet.')) : 'No entries yet.';
+  if(n >= 5 && (!S.backupAt || Date.now() - S.backupAt > 7*864e5) && !EXAMPLE) $('bkInfo').innerHTML = '<span class="chip">' + esc($('bkInfo').textContent) + '</span>';
+  var ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints > 1);
+  if(ios && !navigator.standalone) $('bkInfo').innerHTML += '<br><b>On iPhone and iPad:</b> tap Share, then Add to Home Screen, and open it from there. Safari can clear a website\u2019s data after 7 days without a visit; Home Screen apps keep theirs.';
+}
+function renderPro(){
+  var h;
+  if(isPro()){
+    h = '<h3>Pro is unlocked</h3><p>On this device' + (PRO.email ? ', for ' + esc(PRO.email) : ' with a gift code') + '. Caldwell and Herschel 400 are fully checked and print. Thank you.</p>';
+  } else {
+    h = '<h3>Pro: every list, checked and printed</h3>'
+      + '<p style="margin-top:0">Messier and Binocular Messier are free for good. Caldwell and Herschel 400 are free for your first ' + FREE_N + ' objects on each, so you can try them at the eyepiece.</p>'
+      + '<p>Pro checks and prints all 109 Caldwell and all 400 Herschel objects. The Herschel 400 often takes years; Pro keeps every entry in shape the whole way. Lists you log on are always saved and in your backup file, Pro or not.</p>'
+      + (PRICE ? '<p><span class="price">' + esc(PRICE) + '</span> once. No subscription, no account.</p><div class="row"><a class="btn primary" data-buy href="' + esc(buyUrl()) + '" rel="noopener">Get Pro</a></div>' : '<p><b>Pro opens soon.</b> Got a gift code? Enter it below.</p>')
+      + '<label class="f" for="proKey">Bought Pro or got a gift code?</label><div class="row" style="margin-top:0"><input type="text" id="proKey" placeholder="Purchase email or gift code" autocomplete="email" style="flex:1;min-width:200px"><button class="btn" type="button" id="btnUnlock">Unlock</button></div><p class="note" id="proNote"></p>';
+  }
+  $('proCard').innerHTML = h;
+  $('rulesFacts').innerHTML = PROGS.map(function(p){ return '<dt><a href="'+p.url+'" rel="noopener">'+esc(p.name)+'</a></dt><dd style="font-family:var(--sans);font-size:15px;margin-bottom:8px">'+esc(RULES[p.id])+'</dd>'; }).join('');
+}
+function renderAll(){
+  var has = S.obs.length > 0;
+  $('hero').hidden = has || EXAMPLE;
+  $('btnFab').hidden = !has && !EXAMPLE;
+  $('exBanner').hidden = !EXAMPLE;
+  renderTabs(); renderBoard(); renderPrint(); renderPro();
+}
+
+/* ---------- object sheet ---------- */
+var OPEN_K = '';
+function openObj(k){
+  OPEN_K = k; var o = OBJ[k]; if(!o) return;
+  $('objTitle').textContent = fullLab(k);
+  $('objSub').textContent = o[0] + ' in ' + o[1] + (o[4] ? ' · mag ' + o[4] : '') + ' · RA ' + Math.floor(o[2]) + 'h ' + ((o[2]%1)*60).toFixed(1) + 'm · Dec ' + (o[3]<0?'−':'+') + Math.floor(Math.abs(o[3])) + '° ' + pad(Math.round((Math.abs(o[3])%1)*60)) + '′';
+  var same = [k].concat(SAME[k] || []);
+  var os = S.obs.filter(function(x){ return same.indexOf(x.k) >= 0; }).sort(function(a,b){ return obsTime(b) < obsTime(a) ? -1 : 1; });
+  var lists = listsOf(k), html = '<p>On ' + esc(lists.join(', ') || 'none of these lists') + (lists.indexOf('Messier')>=0 ? ' (and Binocular Messier)' : '') + '.</p>';
+  if(k==='NGC 7814') html += '<p class="hint">The League’s manual lists NGC 1750 in this place. Either one counts.</p>';
+  else if(SAME[k]) html += '<p class="hint">Entries for ' + esc(SAME[k].map(mainLab).join(' and ')) + ' count here too: same object.</p>';
+  if(!os.length) html += '<p class="empty">You haven’t logged it yet.</p>';
+  os.forEach(function(x){
+    var probs = [];
+    PROGS.forEach(function(p){ if(!onList(p, x.k) || !eligible(p, x)) return; if(isLocked(p, x.k)){ probs.push(p.name + ': unlock Pro to check'); return; } var m = missing(p, x); if(m.length) probs.push(p.name + ': ' + m.map(function(r){ return missText(p,r); }).join(', ')); });
+    html += '<div class="entry"><div class="eh"><span>' + esc((x.date||'no date') + ' ' + (x.time||'')) + '</span><button class="btn link" type="button" data-edit="' + esc(x.id) + '">Edit</button></div>'
+      + '<p>' + esc([x.g && x.g.ap, x.g && x.g.kind==='bino' ? 'binoculars' : '', x.pw, x.see ? 'seeing '+x.see : '', x.tr ? 'transp. '+x.tr : ''].filter(Boolean).join(' · ')) + '</p>'
+      + (x.d ? '<p>' + esc(x.d) + '</p>' : '')
+      + (probs.length ? '<div class="chips">' + probs.map(function(t){ return '<span class="chip">' + esc(t) + '</span>'; }).join('') + '</div>' : '') + '</div>';
+  });
+  $('objBody').innerHTML = html;
+  showDlg($('dlgObj'));
+}
+
+/* ---------- log form ---------- */
+var EDIT = null, PICK = '', KIND = 'scope', SEE = 0, TR = 0;
+function segHtml(cur){ var h = ''; for(var i=1;i<=5;i++) h += '<button type="button" data-v="'+i+'" aria-pressed="'+(cur===i)+'">'+i+'</button>'; return h; }
+function setKind(k){ KIND = k; Array.prototype.forEach.call($('fKind').children, function(b){ b.setAttribute('aria-pressed', String(b.dataset.v===k)); }); $('fApL').textContent = k==='bino' ? 'Size' : 'Aperture'; $('fAp').placeholder = k==='bino' ? 'e.g. 10x50' : '8 in or 200 mm'; }
+function pwChips(){
+  var seen = [], obs = S.obs.slice().sort(function(a,b){ return stamp(b) - stamp(a); });
+  obs.forEach(function(o){ if(o.pw && seen.indexOf(o.pw) < 0 && seen.length < 4 && (!o.g || o.g.kind===KIND)) seen.push(o.pw); });
+  $('pwChips').innerHTML = seen.map(function(v){ return '<button type="button" class="when-chip" data-pw="' + esc(v) + '">' + esc(v) + '</button>'; }).join('');
+}
+function fillLists(){
+  var ap = {}, pw = {}, nm = {};
+  S.obs.forEach(function(o){ if(o.g && o.g.ap) ap[o.g.ap] = 1; if(o.pw) pw[o.pw] = 1; if(o.g && o.g.name) nm[o.g.name] = 1; });
+  function opts(m){ return Object.keys(m).slice(-12).map(function(v){ return '<option value="'+esc(v)+'">'; }).join(''); }
+  $('apList').innerHTML = opts(ap); $('pwList').innerHTML = opts(pw); $('nameList').innerHTML = opts(nm);
+}
+function pickObj(k){ PICK = k; $('fObj').value = k ? fullLab(k) : ''; $('sugg').hidden = true; $('objInfo').textContent = k ? (OBJ[k][0] + ' in ' + OBJ[k][1] + '. On ' + (listsOf(k).join(', ') || 'none of the lists') + '.') : ''; liveCheck(); }
+function openLog(k, id){
+  var o = id ? S.obs.filter(function(x){ return x.id===id; })[0] : null;
+  EDIT = o || null;
+  var ll = S.last || {}, src = o || {date:today(), time:nowTime(), lat:ll.lat, lon:ll.lon, see:ll.see, tr:ll.tr, g:ll.g, pw:''};
+  $('logTitle').textContent = o ? 'Edit entry' : 'Log an object';
+  $('logSub').textContent = EXAMPLE ? 'Example log: this entry won’t be saved' : '';
+  $('fDate').value = src.date || ''; $('fTime').value = src.time || '';
+  var g = src.g || {}; setKind(g.kind || 'scope'); $('fAp').value = g.ap || ''; $('fName').value = g.name || '';
+  $('fPw').value = src.pw || ''; SEE = src.see || 0; TR = src.tr || 0;
+  $('fSee').innerHTML = segHtml(SEE); $('fTr').innerHTML = segHtml(TR);
+  $('fDesc').value = o ? (o.d || '') : ''; $('fSk').checked = !!(o && o.sk);
+  $('fLat').value = src.lat!=null ? src.lat : ''; $('fLon').value = src.lon!=null ? src.lon : '';
+  $('btnDelete').hidden = !o;
+  AUTO_PW = ''; if(!o) $('fAp').dispatchEvent(new Event('input'));
+  fillLists(); pwChips(); pickObj(o ? o.k : (k || ''));
+  showDlg($('dlgLog'));
+  setTimeout(function(){
+    var ae = document.activeElement, dlg = $('dlgLog');   /* only if the observer hasn't started typing somewhere */
+    if(ae && dlg.contains(ae) && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) && ae.id !== 'fObj') return;
+    if(!PICK) $('fObj').focus(); else if(!o) $('fDesc').focus();
+  }, 60);
+}
+function parseCoord(v, axis){   /* axis 'lat' or 'lon'; returns a number, null for empty, NaN for something unreadable */
+  var t = String(v||'').trim().toUpperCase().replace(/[\u2212\u2012\u2013\u2014]/g, '-').replace(',', '.').replace(/[°º'′"″]/g, ' ').replace(/\s+/g, ' ').trim();
+  if(!t) return null;
+  var m = /^([NSEW])?\s*([+-]?\d+(?:\.\d+)?)(?: (\d+(?:\.\d+)?))?(?: (\d+(?:\.\d+)?))?\s*([NSEW])?$/.exec(t);
+  if(!m || (m[1] && m[5])) return NaN;
+  if((m[3] && +m[3] >= 60) || (m[4] && +m[4] >= 60)) return NaN;
+  var mag = Math.abs(parseFloat(m[2])) + (m[3] ? +m[3]/60 : 0) + (m[4] ? +m[4]/3600 : 0);
+  m = [m[0], m[1], (/^-/.test(m[2]) ? '-' : '') + mag, null, null, m[5]]; m[3] = m[5];
+  var d = m[1] || m[3] || '', n = parseFloat(m[2]), lim = axis==='lat' ? 90 : 180;
+  if(d && (axis==='lat' ? 'NS' : 'EW').indexOf(d) < 0) return NaN;
+  if(d && /^[+-]/.test(m[2])) return NaN;
+  if(d==='S' || d==='W') n = -n;
+  return Math.abs(n) <= lim ? n : NaN;
+}
+function coordText(lat, lon){ return Math.abs(lat).toFixed(2) + '° ' + (lat < 0 ? 'S' : 'N') + ', ' + Math.abs(lon).toFixed(2) + '° ' + (lon < 0 ? 'W' : 'E'); }
+function readForm(){
+  var lat = parseCoord($('fLat').value, 'lat'), lon = parseCoord($('fLon').value, 'lon');
+  if(lat!==lat) lat = null; if(lon!==lon) lon = null;
+  var ap = $('fAp').value.trim(), nm = $('fName').value.trim();
+  return {k:PICK, date:$('fDate').value, time:$('fTime').value, lat:lat, lon:lon, see:SEE||0, tr:TR||0,
+    g:{kind:KIND, ap:ap, name:nm}, pw:$('fPw').value.trim(), d:$('fDesc').value.trim(), sk:$('fSk').checked};
+}
+function liveCheck(){
+  var box = $('logCheck'); if(!PICK){ box.innerHTML = ''; return; }
+  var o = readForm(), out = [], okL = [];
+  PROGS.forEach(function(p){
+    if(!onList(p, o.k)) return;
+    if(p.pro && !isPro() && !freeFor(p, o.k) && freeLeft(p) <= 0){ out.push('<b>' + esc(p.name) + '</b>: your ' + FREE_N + ' free objects are used. This entry is saved; unlock Pro to check and print it.'); return; }
+    if(!eligible(p, o)) return;
+    var m = missing(p, o);
+    if(m.length) out.push('<b>' + esc(p.name) + '</b> still needs: ' + esc(m.map(function(r){ return missText(p,r).replace(/^no /,''); }).join(', ')));
+    else okL.push(p.name);
+  });
+  var pl = parseCoord($('fLat').value, 'lat'), pn = parseCoord($('fLon').value, 'lon'), bad = pl!==pl || pn!==pn;
+  var tzo = new Date().getTimezoneOffset(), side = '';
+  if(o.lon!=null && o.lon > 20 && tzo >= 180) side = 'This longitude is east of Greenwich, but your device is on a time zone in the Americas. West is negative: type −' + Math.abs(o.lon) + ' or ' + Math.abs(o.lon) + ' W.';
+  if(o.lon!=null && o.lon < -20 && tzo <= -180) side = 'This longitude is west of Greenwich, but your device is on an eastern time zone. East is positive: type ' + Math.abs(o.lon) + ' or ' + Math.abs(o.lon) + ' E.';
+  $('geoNote').textContent = o.lat!=null && o.lon!=null ? coordText(o.lat, o.lon) : 'West and south are negative, or type 105 W.';
+  box.innerHTML = (bad ? '<div class="warn">Latitude is −90 to 90 (or 40 N), longitude −180 to 180 (or 105 W), in decimal degrees.</div>' : '')
+    + (side ? '<div class="warn">' + esc(side) + '</div>' : '')
+    + (out.length ? '<div class="warn">' + out.join('<br>') + '<br>You can save now and fill these in later.</div>' : '')
+    + (okL.length ? '<div class="okbox">Complete for ' + esc(okL.join(', ')) + '.</div>' : '');
+}
+function search(q){
+  q = q.trim().toLowerCase().replace(/\s+/g,' '); if(!q) return [];
+  var qs = q.replace(/\s/g,''), out = [];
+  var bare = /^\d+$/.test(qs);
+  Object.keys(OBJ).forEach(function(k){
+    var labs = (LABELS[k] || [k]).map(function(l){ return l.toLowerCase().replace(/\s/g,''); });
+    if(k==='NGC 1750') labs = ['ngc1750'];
+    var nm = (OBJ[k][5] || '').toLowerCase(), score = 0, len = 99;
+    function hit(sc, l){ if(sc > score || (sc===score && l.length < len)){ score = sc; len = l.length; } }
+    labs.forEach(function(l){
+      if(l===qs) hit(100, l);
+      else if(bare && (l==='ngc'+qs || l==='m'+qs || l==='c'+qs || l==='ic'+qs)) hit(80, l);
+      else if(l.indexOf(qs)===0 && qs.length >= 2) hit(40, l);
+      else if(bare && qs.length >= 3 && l.replace(/^[a-z]+/,'').indexOf(qs)===0) hit(30, l);
+    });
+    if(nm && q.length >= 3 && nm.indexOf(q) >= 0) hit(60, nm);
+    if(q.length >= 3 && OBJ[k][0].toLowerCase()===q) hit(20, nm || 'zzzzzzzz');
+    (FIND[k] || []).forEach(function(w){ if(w===qs) hit(90, w); else if(qs.length >= 4 && w.indexOf(qs)===0) hit(50, w); });
+    if(score) out.push([score, k, len]);
+  });
+  out.sort(function(a,b){ return b[0]-a[0] || a[2]-b[2] || mainLab(a[1]).length - mainLab(b[1]).length; });
+  return out.slice(0, 8).map(function(x){ return x[1]; });
+}
+function saveEntry(){
+  if(!PICK){ $('fObj').focus(); $('objInfo').textContent = 'Pick an object from the list first.'; return false; }
+  var pl = parseCoord($('fLat').value, 'lat'), pn = parseCoord($('fLon').value, 'lon');
+  if(pl!==pl || pn!==pn){ liveCheck(); (pl!==pl ? $('fLat') : $('fLon')).focus(); return false; }
+  var o = readForm(), wasEdit = !!EDIT;
+  if(EDIT){
+    var cur = S.obs.filter(function(x){ return x.id===EDIT.id; })[0];   /* another tab may have replaced the object */
+    if(!cur){ cur = EDIT; S.obs.push(cur); }
+    Object.keys(o).forEach(function(k){ cur[k] = o[k]; }); cur.edited = Date.now(); if(!cur.zone) cur.zone = myZone();
+  }
+  else {
+    o.id = uid(); o.ts = Date.now(); o.zone = myZone();
+    S.obs.push(o);
+    if(!EXAMPLE){
+      if(!S.started){ S.started = Date.now(); track('tool-start'); try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){} }
+      track('obs-saved');
+      if(S.obs.length >= 5 && !S.ev.obs5){ S.ev.obs5 = Date.now(); track('obs-5'); }
+    }
+    /* next entry starts from this one; empty fields keep what was there */
+    var L = S.last || {};
+    S.last = normLast({lat: o.lat!=null && o.lon!=null ? o.lat : L.lat, lon: o.lat!=null && o.lon!=null ? o.lon : L.lon, see:o.see || L.see, tr:o.tr || L.tr,
+      g: (o.g.ap || o.g.name) ? o.g : L.g, pw:o.pw || L.pw});
+  }
+  var wall = false;
+  PROGS.forEach(function(p){
+    if(!p.pro) return; var it = itemOf(p, o.k); if(!it) return;
+    if(S.free[p.id].indexOf(it.k) < 0){ if(S.free[p.id].length < FREE_N) S.free[p.id].push(it.k); else if(!isPro()) wall = true; }
+  });
+  if(wall && !EXAMPLE && !S.ev.wall){ S.ev.wall = Date.now(); track('pro-wall'); }
+  save(); closeDlg($('dlgLog')); renderAll();
+  say((wasEdit ? 'Entry updated: ' : 'Logged ') + mainLab(o.k));
+  return true;
+}
+
+/* ---------- dialogs ---------- */
+function showDlg(d){ if(d.open) return; if(d.showModal) d.showModal(); else d.setAttribute('open',''); }
+function closeDlg(d){ if(d.close) d.close(); else d.removeAttribute('open'); }
+
+/* ---------- print + csv + backup ---------- */
+function myZone(){ try{ return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; }catch(e){ return ''; } }
+function zoneOffset(zone, ms){   /* minutes the zone's clock is ahead of UT at instant ms */
+  try{
+    var f = new Intl.DateTimeFormat('en-US', {timeZone:zone, hourCycle:'h23', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'}), q = {};
+    f.formatToParts(new Date(ms)).forEach(function(x){ q[x.type] = x.value; });
+    return (Date.UTC(+q.year, +q.month-1, +q.day, (+q.hour)%24, +q.minute) - Math.floor(ms/60000)*60000) / 60000;
+  }catch(e){ return null; }
+}
+function utMs(o){
+  var p = o.date.split('-').map(Number), t = o.time.split(':').map(Number), wall = Date.UTC(p[0], p[1]-1, p[2], t[0], t[1]);
+  if(o.zone){ var off = zoneOffset(o.zone, wall); if(off!=null){ var off2 = zoneOffset(o.zone, wall - off*60000); return wall - (off2!=null ? off2 : off)*60000; } }
+  return new Date(p[0], p[1]-1, p[2], t[0], t[1]).getTime();
+}
+function fmtUT(o){
+  if(!o.date || !o.time) return '';
+  var d = new Date(utMs(o));
+  return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)+'-'+pad(d.getUTCDate())+' '+pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())+' UT';
+}
+function gearText(o){ var g = o.g || {}; return [g.ap, g.kind==='bino' ? 'binoculars' : (g.kind==='scope' ? 'telescope' : ''), g.name ? '(' + g.name + ')' : ''].filter(Boolean).join(' '); }
+var LAST_LOCK = 0;
+function printHtml(p){
+  var rows = status(p), c = tally(rows), lockN = 0;
+  var body = rows.filter(function(r){ return r.best && !(S.prDone && r.st==='fix'); }).map(function(r){
+    if(r.st==='lock'){ lockN++; return ''; }
+    var o = r.best, miss = r.miss.map(function(x){ return missText(p,x); });
+    return '<tr><td>' + esc(r.it.lab) + (o.k!==r.it.k ? ' (logged as ' + esc(mainLab(o.k)) + ')' : '') + (OBJ[r.it.k][5] ? '<br>' + esc(OBJ[r.it.k][5]) : '') + '</td><td>' + esc(o.date||'') + ' ' + esc(o.time||'') + '<br>' + esc(fmtUT(o)) + '</td><td>' + (o.lat!=null && o.lon!=null ? esc(coordText(o.lat, o.lon)) : '') + '</td><td>' + (o.see ? o.see + '/5' : '') + ' / ' + (o.tr ? o.tr + '/5' : '') + '</td><td>' + esc(gearText(o)) + '</td><td>' + esc(o.pw||'') + '</td><td>' + esc(o.d||'') + (o.sk ? ' [sketch on paper, attached]' : '') + (miss.length ? '<div class="miss">Missing: ' + esc(miss.join(', ')) + '</div>' : '') + '</td></tr>';
+  }).join('');
+  var notSeen = rows.filter(function(r){ return !r.best; }).map(function(r){ return r.it.lab; });
+  var who = [S.name ? 'Observer: ' + esc(S.name) : '', S.club ? 'Society: ' + esc(S.club) : '', S.addr ? 'Address: ' + esc(S.addr).replace(/\n/g, ', ') : '', S.email ? 'Email: ' + esc(S.email) : '', S.phone ? 'Phone: ' + esc(S.phone) : '',
+    S.sendTo==='society' ? 'Send the certificate to: my society\u2019s awards coordinator' : (S.addr ? 'Send the certificate to: me, at the address above' : '')].filter(Boolean);
+  LAST_LOCK = lockN;
+  var zones = []; rows.forEach(function(r){ if(r.best && r.best.zone && zones.indexOf(r.best.zone) < 0) zones.push(r.best.zone); });
+  var head = (p.name + ' Observing Program' + (S.name ? ' \u2014 ' + S.name : '')).replace(/["\\\n]/g, ' ');
+  return '<style>@page{@top-left{content:"' + head + '";font:8pt Georgia,serif}@bottom-right{content:"Page " counter(page) " of " counter(pages);font:8pt Georgia,serif}}</style>'
+    + '<h1>' + esc(p.name) + ' Observing Program: observing log</h1>'
+    + (who.length ? '<p>' + who.join('<br>') + '</p>' : '')
+    + '<p>Printed ' + esc(today()) + '. ' + c.done + ' complete' + (c.fix ? ', ' + c.fix + ' missing a field (marked)' : '') + '. Seeing and transparency on a 1 (poor) to 5 (excellent) scale. UT is worked out from each entry\u2019s local time and time zone' + (zones.length ? ' (' + esc(zones.join(', ')) + ')' : '') + '.</p>'
+    + '<table><thead><tr><th>Object</th><th>Date, local time / UT</th><th>Lat, long</th><th>Seeing / transp.</th><th>Instrument</th><th>Power</th><th>Description</th></tr></thead><tbody>' + body + '</tbody></table>'
+    + (S.prTodo && notSeen.length ? '<p style="margin-top:8pt">Not yet observed (' + notSeen.length + '): ' + esc(notSeen.join(', ')) + '</p>' : '')
+    + '<table style="margin-top:14pt;width:auto"><tr><td style="padding:8pt;min-width:520pt">I made these observations myself, finding each object without GoTo, digital setting circles or a phone app.<br><br>Observer\u2019s signature: ______________________________ &nbsp; Date: ____________</td></tr></table>'
+    + (S.prOff ? '<table style="margin-top:8pt;width:auto"><tr><td style="padding:8pt;min-width:520pt">I have reviewed this observing log and the observations meet the requirements of the ' + esc(p.name) + ' Observing Program.<br><br>Reviewed by: ______________________________ &nbsp; Position: ____________________<br><br>Society: ______________________________ &nbsp; Signature: ____________________ &nbsp; Date: ____________</td></tr></table>' : '')
+    + '<p style="margin-top:8pt;font-size:7pt">Made with Observing Log, samsbench.com/observing-log</p>';
+}
+function csvCell(v){ var num = typeof v==='number'; v = String(v==null?'':v); if(!num && /^[=+\-@\t\r]/.test(v)) v = "'" + v; return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; }
+function csvAll(){
+  var head = ['object','labels','date','local_time','ut','latitude','longitude','seeing_1to5','transparency_1to5','instrument_kind','aperture','telescope_name','power','description','sketch','lists'];
+  var lines = [head.join(',')];
+  S.obs.slice().sort(function(a,b){ return obsTime(a) < obsTime(b) ? -1 : 1; }).forEach(function(o){
+    var g = o.g || {};
+    lines.push([o.k, fullLab(o.k), o.date, o.time, fmtUT(o), o.lat, o.lon, o.see||'', o.tr||'', g.kind||'', g.ap||'', g.name||'', o.pw||'', o.d||'', o.sk?'yes':'', listsOf(o.k).join('; ')].map(csvCell).join(','));
+  });
+  return lines.join('\r\n');
+}
+function download(name, text, type){
+  var b = new Blob([text], {type:type}), a = document.createElement('a');
+  a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function sha256hex(str){ return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(b){ return Array.prototype.map.call(new Uint8Array(b), function(x){ return ('0'+x.toString(16)).slice(-2); }).join(''); }); }
+function buyUrl(){
+  var a = ''; try{ a = (new URLSearchParams(location.search).get('a') || '').replace(/[^A-Za-z0-9_.-]/g,'').slice(0,40); if(a) localStorage.setItem('olog.aff', a); else a = localStorage.getItem('olog.aff') || ''; }catch(e){}
+  return a && CHECKOUT ? CHECKOUT + '?a=' + encodeURIComponent(a) : (CHECKOUT_HOME || CHECKOUT);
+}
+
+/* ---------- example log (never saved) ---------- */
+function exampleState(){
+  var s = blank(), site = {lat:39.74, lon:-104.99}, base = [
+    ['NGC 6205','2026-06-14','22:10',5,4,'8 in','133x','Big bright globular. Core packed, edges resolve into many faint stars at 133x. The propeller dark lane comes and goes with averted vision.'],
+    ['NGC 6341','2026-06-14','22:34',5,4,'8 in','','Smaller and more concentrated than M13. Outer stars resolve, core stays a bright glow.'],
+    ['NGC 6720','2026-06-14','22:58',4,4,'8 in','200x',''],
+    ['NGC 6853','2026-06-14','23:20',4,4,'8 in','48x','Apple core shape is obvious. Fainter wings fill in the oval with averted vision. Not a hint of the central star.'],
+    ['NGC 6618','2026-07-11','23:05',3,3,'8 in','48x','Swan shape bright and easy, the curved neck has a dark bay inside. Clouds of glow around the bright bar.'],
+    ['NGC 6611','2026-07-11','23:30',3,3,'8 in','48x','Cluster of 20 or so stars wrapped in faint nebula. No pillars seen.'],
+    ['NGC 6523','2026-07-11','23:52',3,3,'8 in','48x','Huge glow split by the dark lane. Cluster on the east side. Hourglass bright near the west edge.'],
+    ['NGC 6514','2026-07-12','00:15',3,3,'8 in','48x','Faint round glow with three dark lanes meeting in the middle, seen with averted vision. Blue reflection part to the north is very faint.'],
+    ['NGC 224','2026-09-20','21:40',4,5,'8 in','40x','Bright oval core fills a third of the field. One dust lane seen along the near side. M32 and M110 in the same field.'],
+    ['NGC 221','2026-09-20','21:45',4,5,'8 in','133x','Small bright round glow, star-like core.'],
+    ['NGC 205','2026-09-20','21:50',4,5,'8 in','','Large faint oval, no core.'],
+    ['NGC 598','2026-09-20','22:15',4,5,'8 in','40x','Big faint glow. Hint of two arms with averted vision. NGC 604 shows as a knot.'],
+    ['NGC 7662','2026-09-20','22:40',4,5,'8 in','200x','Blue Snowball: small blue disk, ring structure hinted at 200x.']
+  ];
+  base.forEach(function(r, i){ s.obs.push({id:'ex'+i, k:r[0], date:r[1], time:r[2], lat:site.lat, lon:site.lon, see:r[3], tr:r[4], g:{kind:'scope', ap:r[5], name:'Dob'}, pw:r[6], d:r[7], sk:false, ts:i, zone:'America/Denver'}); });
+  [['NGC 224','2026-10-03','20:50','10x50','10x','Long bright smear, core obvious.'],['M45','2026-10-03','23:30','10x50','10x','']].forEach(function(r, i){
+    s.obs.push({id:'exb'+i, k:r[0], date:r[1], time:r[2], lat:site.lat, lon:site.lon, see:3, tr:4, g:{kind:'bino', ap:r[3], name:''}, pw:r[4], d:r[5], sk:false, ts:100+i, zone:'America/Denver'});
+  });
+  s.last = {lat:site.lat, lon:site.lon, see:4, tr:4, g:{kind:'scope', ap:'8 in', name:'Dob'}};
+  s.name = 'Pat Example'; s.club = 'Front Range Astronomy Club';
+  fillFree(s);
+  return s;
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', function(e){
+  var t = e.target, b = t.closest('button, a');
+  if(!b) return;
+  if(b.hasAttribute('data-close')){ closeDlg(b.closest('dialog')); return; }
+  if(b.dataset.prog){ S.prog = b.dataset.prog; save(); renderAll(); var p = curProg(); if(p.pro && !isPro() && !EXAMPLE) trackOnce('pro-view'); return; }
+  if(b.dataset.when){ WHEN = b.dataset.when; renderBoard(); return; }
+  if(b.dataset.log){ openLog(b.dataset.log); return; }
+  if(b.dataset.pw!=null && b.classList.contains('when-chip')){ $('fPw').value = b.dataset.pw; liveCheck(); return; }
+  if(b.dataset.edit){ closeDlg($('dlgObj')); openLog('', b.dataset.edit); return; }
+  if(b.dataset.k && b.closest('#dlgLog')==null){ openObj(b.dataset.k); return; }
+  if(b.hasAttribute('data-pro')){ if(!EXAMPLE) trackOnce('pro-view'); return; }
+  if(b.hasAttribute('data-buy')){ track('buy-click'); return; }
+  if(b.dataset.pick){ pickObj(b.dataset.pick); $('fDesc').focus(); return; }
+  if(b.parentNode && (b.parentNode.id==='fSee' || b.parentNode.id==='fTr')){
+    var v = +b.dataset.v, isSee = b.parentNode.id==='fSee';
+    if(isSee) SEE = SEE===v ? 0 : v; else TR = TR===v ? 0 : v;
+    b.parentNode.innerHTML = segHtml(isSee ? SEE : TR); liveCheck(); return;
+  }
+  if(b.parentNode && b.parentNode.id==='fKind'){ setKind(b.dataset.v); $('fAp').dispatchEvent(new Event('input')); liveCheck(); return; }
+  switch(b.id){
+    case 'btnNight': setNight(!NIGHT, true); if(NIGHT) trackOnce('night-on'); return;
+    case 'btnStart': case 'btnFab': openLog(''); return;
+    case 'btnSetup': openLog(''); return;
+    case 'btnLogThis': closeDlg($('dlgObj')); openLog(OPEN_K); return;
+    case 'btnExample': EXAMPLE = true; S = exampleState(); S.prog = 'mes'; track('example'); renderAll(); window.scrollTo(0,0); say('Example log loaded'); return;
+    case 'btnExOff': EXAMPLE = false; mergeDisk(REAL); S = REAL; renderAll(); window.scrollTo(0,0); return;
+    case 'btnDelete':
+      if(!EDIT) return;
+      if(b.dataset.armed!=='1'){ b.dataset.armed = '1'; b.textContent = 'Tap again to delete'; setTimeout(function(){ b.dataset.armed = ''; b.textContent = 'Delete entry'; }, 4000); return; }
+      var gone = EDIT.id; S.obs = S.obs.filter(function(x){ return x.id !== gone; }); S.del.push({id:gone, at:Date.now()});
+      b.dataset.armed = ''; b.textContent = 'Delete entry';
+      save(); closeDlg($('dlgLog')); renderAll(); say('Entry deleted');
+      return;
+    case 'btnGeo':
+      if(!navigator.geolocation){ $('geoNote').textContent = 'This browser can’t share location. Type it in.'; return; }
+      $('geoNote').textContent = 'Finding you…';
+      navigator.geolocation.getCurrentPosition(function(pos){
+        $('fLat').value = pos.coords.latitude.toFixed(2); $('fLon').value = pos.coords.longitude.toFixed(2);
+        liveCheck(); $('geoNote').textContent += ' (from your device, rounded to about 1 km)';
+      }, function(){ $('geoNote').textContent = 'Couldn’t get your location. Type it in: west and south are negative.'; }, {timeout:15000, maximumAge:600000});
+      return;
+    case 'btnPrint': {
+      var p = PBY[$('prProg').value] || curProg();
+      var rows = status(p);
+      if(!rows.some(function(r){ return r.best; })){ $('prNote').textContent = 'Nothing logged on ' + p.name + ' yet.'; return; }
+      $('printArea').innerHTML = printHtml(p);
+      $('prNote').textContent = LAST_LOCK ? LAST_LOCK + ' logged ' + p.name + ' objects are past the free ' + FREE_N + ' and aren\u2019t in this print. Unlock Pro to include them.' : '';
+      if(!EXAMPLE) track('print');
+      window.print(); return;
+    }
+    case 'btnCsv':
+      if(!S.obs.length){ $('prNote').textContent = 'Nothing logged yet.'; return; }
+      download('observing-log.csv', '﻿' + csvAll(), 'text/csv'); if(!EXAMPLE) track('csv'); return;
+    case 'btnBackup': case 'btnBackup2': case 'btnBackup3':
+      if(EXAMPLE){ $('bkNote').textContent = 'This is the example log. Clear it first to back up your own.'; return; }
+      download('observing-log-backup-' + today() + '.json', JSON.stringify({app:'observing-log', v:1, saved:new Date().toISOString(), obs:S.obs, orph:S.orph, last:S.last, name:S.name, club:S.club}), 'application/json');
+      S.backupAt = Date.now(); save(); renderPrint(); track('backup'); $('bkNote').textContent = 'Backup saved to your downloads.'; return;
+    case 'btnUnlock': unlock(); return;
+  }
+});
+$('logForm').addEventListener('submit', function(e){ e.preventDefault(); saveEntry(); });
+['fDate','fTime','fAp','fPw','fDesc','fLat','fLon','fName'].forEach(function(id){ $(id).addEventListener('input', liveCheck); });
+/* binoculars: "10x50" already says the power; fill it while the power box is empty or was filled this way */
+var AUTO_PW = '';
+$('fAp').addEventListener('input', function(){
+  if(KIND!=='bino') return;
+  var m = /^\s*(\d+(?:\.\d+)?)\s*[x×]/i.exec(this.value), pw = $('fPw');
+  if(m && (!pw.value || pw.value===AUTO_PW)){ AUTO_PW = m[1] + 'x'; pw.value = AUTO_PW; liveCheck(); }
+});
+$('fSk').addEventListener('change', liveCheck);
+$('fObj').addEventListener('input', function(){
+  PICK = ''; $('objInfo').textContent = '';
+  var r = search(this.value), s = $('sugg');
+  s.innerHTML = r.map(function(k){ return '<li><button type="button" data-pick="'+esc(k)+'">'+esc(fullLab(k))+' <span class="meta">'+esc(OBJ[k][0])+', '+esc(OBJ[k][1])+'</span></button></li>'; }).join('');
+  s.hidden = !r.length;
+  if(!r.length && this.value.trim().length > 1) $('objInfo').textContent = 'Not on the Messier, Caldwell or Herschel 400 lists. Try M 13, C 14 or NGC 7662.';
+  liveCheck();
+});
+$('fObj').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); var f = $('sugg').querySelector('button'); if(f) f.click(); } });
+$('prProg').addEventListener('change', function(){ $('prNote').textContent = ''; });
+[['prName','name'],['prClub','club'],['prAddr','addr'],['prEmail','email'],['prPhone','phone'],['prSend','sendTo']].forEach(function(f){
+  $(f[0]).addEventListener(f[0]==='prSend' ? 'change' : 'input', function(){ S[f[1]] = this.value.slice(0, 400); save(); });
+});
+['prOff','prTodo','prDone'].forEach(function(id){ $(id).addEventListener('change', function(){ S[id] = this.checked; save(); }); });
+$('restoreFile').addEventListener('change', function(){
+  var f = this.files && this.files[0]; if(!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){
+    try{
+      var j = JSON.parse(rd.result); if(!j || j.app!=='observing-log' || !Array.isArray(j.obs)) throw 0;
+      var cj = clean({obs:j.obs, orph:j.orph}), inc = cj.obs, have = {}, add = 0;
+      if(cj.orph.length) S.orph = S.orph.concat(cj.orph.filter(function(o){ return !S.orph.some(function(x){ return x.id===o.id; }); }));
+      if(EXAMPLE){ EXAMPLE = false; S = REAL; }
+      var upd = 0;
+      S.obs.forEach(function(o, i){ have[o.id] = i; });
+      inc.forEach(function(o){
+        var wasDead = S.del.some(function(x){ return x.id===o.id; });
+        if(wasDead){ o.edited = Date.now(); S.del = S.del.filter(function(x){ return x.id !== o.id; }); }   /* restoring brings a deleted entry back */
+        if(!have.hasOwnProperty(o.id)){ S.obs.push(o); add++; }
+        else if(stamp(o) > stamp(S.obs[have[o.id]])){ S.obs[have[o.id]] = o; upd++; }
+      });
+      fillFree(S);
+      if(j.last && !(S.last && S.last.g)) S.last = normLast(j.last);
+      if(j.name && !S.name) S.name = String(j.name); if(j.club && !S.club) S.club = String(j.club);
+      if(add && !S.started) S.started = Date.now();
+      if(S.obs.length >= 5) S.ev.obs5 = S.ev.obs5 || Date.now();   /* restored logs don't count as reaching 5 entries here */
+      save(); renderAll();
+      $('bkNote').textContent = (add || upd) ? ('Added ' + add + ', updated ' + upd + ' from the backup.') : 'Every entry in that file is already here, in the same or a newer version.';
+    }catch(e){ $('bkNote').textContent = 'That file isn’t an Observing Log backup.'; }
+  };
+  rd.readAsText(f); this.value = '';
+});
+
+/* ---------- Pro unlock ---------- */
+function unlock(){
+  var inp = $('proKey'), v = (inp.value||'').trim(), note = $('proNote');
+  if(!v){ inp.focus(); note.textContent = 'Enter your purchase email or gift code.'; return; }
+  if(v.indexOf('@') < 0){
+    var code = v.toUpperCase().replace(/\s+/g,'');
+    note.textContent = 'Checking…';
+    sha256hex(code).then(function(hx){
+      if(GIFT.indexOf(hx) >= 0){ PRO = {gift:hx.slice(0,12)}; lsSet(PROKEY, PRO); track('pro-gift'); renderAll(); say('Pro unlocked'); }
+      else note.textContent = 'That code didn’t work. Check it against your email, letter for letter.';
+    }, function(){ note.textContent = 'This browser can’t check codes. Try another browser.'; });
+    return;
+  }
+  var em = v.toLowerCase();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ note.textContent = 'That doesn’t look like an email address.'; return; }
+  note.textContent = 'Checking…';
+  fetch(VERIFY, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({app:APP_KEY, email:em})}).then(function(r){ return r.json(); }).then(function(j){
+    if(j && j.ok && j.valid){ PRO = {email:em}; lsSet(PROKEY, PRO); track('pro-unlocked'); renderAll(); say('Pro unlocked'); }
+    else if(j && j.ok) note.textContent = 'No purchase found for that email. Use the email from your Whop receipt.';
+    else note.textContent = 'Couldn’t check right now. Please try again in a minute.';
+  }, function(){ note.textContent = 'Couldn’t reach the check. You need a connection for this one step.'; });
+}
+
+/* ---------- night mode ---------- */
+/* first visit after dark opens in red light; after that the observer's own choice sticks */
+function sunAltitude(date, lat, lon){   /* low-precision solar position, good to about a degree */
+  var r = Math.PI/180, d = date.getTime()/864e5 + 2440587.5 - 2451545.0, g = (357.529 + 0.98560028*d)*r, q = 280.459 + 0.98564736*d;
+  var L = (q + 1.915*Math.sin(g) + 0.020*Math.sin(2*g))*r, e = (23.439 - 0.00000036*d)*r;
+  var ra = Math.atan2(Math.cos(e)*Math.sin(L), Math.cos(L))/r/15, dec = Math.asin(Math.sin(e)*Math.sin(L))/r;
+  var ha = (lstHours(date, lon) - ra)*15*r;
+  return Math.asin(Math.sin(dec*r)*Math.sin(lat*r) + Math.cos(dec*r)*Math.cos(lat*r)*Math.cos(ha))/r;
+}
+/* first visit after sunset opens in red light (sun below -4°, from the last logged place or the device's time zone);
+   after that the observer's own choice sticks */
+var NIGHT = (function(){
+  var v = lsGet(NIGHTKEY, null); if(typeof v==='boolean') return v;
+  var ll = REAL.last || {}, lat = ll.lat!=null ? ll.lat : 40, lon = ll.lon!=null ? ll.lon : -new Date().getTimezoneOffset()/4;
+  try{ return sunAltitude(new Date(), lat, lon) < -4; }catch(e){ var h = new Date().getHours(); return h >= 18 || h < 6; }
+})();
+function setNight(on, keep){
+  NIGHT = on; document.documentElement.setAttribute('data-night', on ? '1' : '0'); if(keep) lsSet(NIGHTKEY, on);
+  $('btnNight').setAttribute('aria-pressed', String(on)); $('btnNight').textContent = on ? 'Day colors' : 'Red light';
+  var m = document.querySelector('meta[name=theme-color]'); if(m) m.content = on ? '#000000' : '#EEE8DA';
+}
+
+window.__olog = {altitude:altitude, lstHours:lstHours, search:search, missing:missing, PBY:PBY, fmtUT:fmtUT, parseCoord:parseCoord, csvCell:csvCell, onList:onList, sunAltitude:function(){ return sunAltitude.apply(null, arguments); }};   // read-only hooks for tests/test_app.py
+/* ---------- start ---------- */
+setNight(NIGHT);
+renderAll();
+if(GC_CODE){ var gs = document.createElement('script'); gs.async = true; gs.src = '//gc.zgo.at/count.js'; gs.setAttribute('data-goatcounter', 'https://'+GC_CODE+'.goatcounter.com/count'); document.head.appendChild(gs); }
+(function(){
+  var q = new URLSearchParams(location.search);
+  var via = (q.get('via') || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20), af = (q.get('a') || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 40);
+  if(via && FRESH_VIA) track('via-' + via);
+  /* delivery check from a real browser (GoatCounter drops server traffic): ?via=selftest&fire=all sends every event name once,
+     only with the .selftest suffix, so the plain counts the tests divide stay clean */
+  if(via==='selftest' && q.get('fire')==='all'){
+    Object.keys(FUNNEL_EV).concat(['night-on']).forEach(function(n, i){ setTimeout(function(){ gcSend(n + '.selftest'); }, 300*i); });
+  }
+  if(af && FRESH_VIA) track('aff-' + af);
+  /* a real returning observer: has entries and was last here more than 6 hours ago */
+  if(REAL.obs.length && REAL.visitAt && Date.now() - REAL.visitAt > 6*3600e3){
+    track('return-visit');                                                   /* every later night */
+    if(!REAL.ev.ret){ REAL.ev.ret = Date.now(); track('returned'); }       /* once per person: the number ol-return divides by tool-start */
+  }
+  if(REAL.obs.length) save();
+  try{ if(REAL.obs.length && navigator.storage && navigator.storage.persisted) navigator.storage.persisted().then(function(p){ if(!p && navigator.storage.persist) navigator.storage.persist(); }); }catch(e){}
+  if(q.get('bought')==='1' && !isPro()){
+    setTimeout(function(){ $('proSec').scrollIntoView(); var k = $('proKey'); if(k){ k.focus(); $('proNote').textContent = 'Thanks! Enter the email you used on Whop and press Unlock.'; } }, 300);
+  }
+  if(q.get('example')==='1'){ $('btnExample').click(); }
+})();
+if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(function(){}); }
+})();
+</script>
+</body>
+</html>
