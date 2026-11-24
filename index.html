@@ -1136,6 +1136,9 @@ if(GC_CODE){ var gs = document.createElement('script'); gs.async = true; gs.src 
   if(pid && FRESH_VIA) track('p-' + pid);
   /* delivery check from a real browser (GoatCounter drops server traffic): ?via=selftest&fire=all sends every event name once,
      only with the .selftest suffix, so the plain counts the tests divide stay clean */
+  if(via==='selftest' && /^n:/.test(q.get('fire') || '')){   /* name test: ?via=selftest&fire=n:a,b,c */
+    q.get('fire').slice(2).split(',').slice(0, 30).forEach(function(n, i){ n = n.toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 30); if(n) setTimeout(function(){ gcSend(n + '.selftest'); }, 2500*i); });
+  }
   if(via==='selftest' && q.get('fire')==='all'){
     Object.keys(FUNNEL_EV).concat(['night-on', 'p-00', 'gift-00000000']).forEach(function(n, i){ setTimeout(function(){ gcSend(n + '.selftest'); }, 2500*i); });   /* GoatCounter drops bursts */
   }

@@ -1,6 +1,6 @@
 /* Offline copy of the app for dark sites with no signal: answer from the cache at once, refresh it in the background.
    Only the app page itself is cached (any ?via= / ?bought= URL maps to it); other pages go to the network. */
-var C = 'olog-e30933991a';
+var C = 'olog-be43411457';
 var APP = new URL('./', self.location).pathname;   // /observing-log/
 self.addEventListener('install', function(e){ e.waitUntil(caches.open(C).then(function(c){ return c.addAll(['./', './manifest.webmanifest', './icon-192.png']); })); self.skipWaiting(); });
 self.addEventListener('activate', function(e){
