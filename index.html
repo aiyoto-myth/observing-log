@@ -396,7 +396,7 @@ var CHECKOUT_HOME = 'https://whop.com/checkout/ch_mraPnDOTpbENTZC/';   // same p
 var VERIFY = 'https://app-bizz-api.whop.site/api/verify';
 var PRICE = '$9';
 var FREE_N = 10;          // Caldwell / Herschel 400: objects you can check and print before Pro
-var GIFT = [];            // SHA-256 of gift codes handed out in letters (the codes themselves are not in this file)
+var GIFT = ["dab6913fdd885a5fdb79afe445380e05d6fbf08ec3930e3fdf3e2f905e7c30e3", "3f3a2a9a1b9cb1aca07ec0f818288a57681243fb9053c7a6d960490bb301aa0c", "a53d1b486c1fff91c0e721538c68f836d88d5ea49f7e5e5dd8c4006f73ee150f", "edecb0ffc8c603c676be32ea14fda3f8ce620c4354eaf1534fce94ace174a912", "dcd92de788122e0b1a09a5879faf5ae1b7cb4fb51ecd5bae968834368d544aa0", "85aceb7b31031f54f1606454d49f7695dbbe96f49f0f471071c2b40efb08ca4b", "0d05a23adb96127f7c1911f48a7feda8353ac074a5c7297846311a92abed0a83", "2a261966a3af91b23cecc3fb06d680f9fdcf5dfee01d7cb5807fa59e622cdf43", "7a466709b6d6189bc695ed0b51003748639fc229ca86b93a083751be512501a2", "09043ef26104aa91f5eac4e8a03f0eea6ea3b56086f6725515dab8fcc592cd12", "ac4a69ca1065b1d8c1af9718c1f909e2644d8fc2d8a66e7da19ba8c07de0d956", "199d3101e473e5475a948d8c82e4ff0fe7a384939406615d421e0fe72c8f3437", "8c6f78ef15e014a12e505af2599c4ba7a9171b93a3e4ba5a359983b3ae046456", "f921d16eae136abc02f9d2dd922903284e2ff11589e54a126f5243f1f98e01f5", "6329cdf097ecd01f34cbec81da59d4008b9fe77412197d9c812d59af95d96ec3", "8a5fcf40f3615d9f7783f2e642c86d9a132a32c5a26ce79d248409be3485d3d3", "dc52410a7cb00344fc3cd7abfa6e629aafe0cad527a676ef2a61c739ad309509", "a81b26d29170d30312bac24116e94635a126f114d839ee95614a98e863aa932e", "0430259e69d3c5c5264ddfd820dadf024d2f48c031c1c9ab7f9cfb90d0b42b4b", "f18632d4d564cf9bb56a473c18f3cfba1aca9445e2e9d653cf12234bef18855e", "e6147c6e6d35e92e9544d879bcbe9799fe667d8e00d443fa7e074f9c474d9ada", "5d8404677d3d8597eaefba7356f92e760ab700b0ffefb7bad50112bd7546d6a2", "0488afbe8d58e03a9a0c4ea1e6228dfa3bc8fd87fe7e28fc95ed534ec1eeeec0", "67edca99605021dbf4a4b1e63304e6805c3f6f4387c164ef9980c91a1630eb9d", "f38712fb935a9b1ee2afe50de4dbf0b5c4b28f06c05f418cd21b32e5c3fab21e", "f44778d025b01a369a216c201d5a6f20c7a93327dec6369a31deea28a4489794", "ebe56bf0a327f294372ba3343b1a0aa5302a6a03baf3d882d989a980ce415815", "370df5cfdc21bc82a24478e21754c87108a39e1ed638e58f354122c450829838", "da32944bb9ad4a82a12b28053bb7ca3f496fe6ca35579b3bbb1ec78c85a01e1f", "13a1fe3f9683fe0efe1ff40658f9e802c79625cbca21b874a27d9aa839378f50", "d10efca81a48275588a6ca22cccff33de09ba5f82ac3f2f105860a267378a409", "a4dede225af59c19e92caa60170626f9b295cf3223f0a7754f8fafedf4fd367b", "39fe0e863dd5a4956c40b046623c46621fd787556760f8cf07a0ecd704f747bd", "0d87cc780b515b8d89568eb4b0da5aa1458ee811fb313c00ad55c049997a5b2c", "1bcf248ef9aeee8a7ca25874d2adb1a23b0c840b000b73f5fffcb622488d3b9f", "ba9464b94cab3f2449c6af3167926a59d29fda321f3e5440c291130bd37df26b", "f6ef74294b4e8dc8e9e9f95d4f93089eeb5d0a9b25a2e75fea503d50a9656610"];   // SHA-256 of the wave-1 letter codes (outreach/gift_codes.csv); the codes themselves are not in this file
 var GC_CODE = 'observinglog';   // GoatCounter site (11-24, same account as Family Formals)
 var KEY = 'olog.v1', PROKEY = 'olog.pro', NIGHTKEY = 'olog.night';
 
@@ -1086,7 +1086,7 @@ function unlock(){
     var code = v.toUpperCase().replace(/\s+/g,'');
     note.textContent = 'Checking…';
     sha256hex(code).then(function(hx){
-      if(GIFT.indexOf(hx) >= 0){ PRO = {gift:hx.slice(0,12)}; lsSet(PROKEY, PRO); track('pro-gift'); renderAll(); say('Pro unlocked'); }
+      if(GIFT.indexOf(hx) >= 0){ PRO = {gift:hx.slice(0,12)}; lsSet(PROKEY, PRO); track('pro-gift'); track('gift-' + hx.slice(0,8)); renderAll(); say('Pro unlocked'); }
       else note.textContent = 'That code didn’t work. Check it against your email, letter for letter.';
     }, function(){ note.textContent = 'This browser can’t check codes. Try another browser.'; });
     return;
@@ -1132,10 +1132,12 @@ if(GC_CODE){ var gs = document.createElement('script'); gs.async = true; gs.src 
   var q = new URLSearchParams(location.search);
   var via = (q.get('via') || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20), af = (q.get('a') || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 40);
   if(via && FRESH_VIA) track('via-' + via);
+  var pid = (q.get('p') || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 6);   /* which letter brought this visit (outreach/queue.csv pid) */
+  if(pid && FRESH_VIA) track('p-' + pid);
   /* delivery check from a real browser (GoatCounter drops server traffic): ?via=selftest&fire=all sends every event name once,
      only with the .selftest suffix, so the plain counts the tests divide stay clean */
   if(via==='selftest' && q.get('fire')==='all'){
-    Object.keys(FUNNEL_EV).concat(['night-on']).forEach(function(n, i){ setTimeout(function(){ gcSend(n + '.selftest'); }, 300*i); });
+    Object.keys(FUNNEL_EV).concat(['night-on', 'p-00', 'gift-00000000']).forEach(function(n, i){ setTimeout(function(){ gcSend(n + '.selftest'); }, 2500*i); });   /* GoatCounter drops bursts */
   }
   if(af && FRESH_VIA) track('aff-' + af);
   /* a real returning observer: has entries and was last here more than 6 hours ago */
