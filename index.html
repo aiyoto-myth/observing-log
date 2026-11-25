@@ -679,7 +679,7 @@ function renderPrint(){
   [['prName','name'],['prClub','club'],['prAddr','addr'],['prEmail','email'],['prPhone','phone'],['prSend','sendTo']].forEach(function(f){ var el = $(f[0]); if(document.activeElement !== el) el.value = S[f[1]] || (f[1]==='sendTo' ? 'me' : ''); });
   $('prOff').checked = !!S.prOff; $('prTodo').checked = !!S.prTodo; $('prDone').checked = !!S.prDone;
   var n = S.obs.length;
-  $('bkInfo').textContent = n ? (n + ' entr' + (n===1?'y':'ies') + ' on this device. ' + (S.backupAt ? 'Last backup: ' + new Date(S.backupAt).toLocaleDateString() + '.' : 'No backup saved yet.')) : 'No entries yet.';
+  $('bkInfo').textContent = n ? (n + ' entr' + (n===1?'y':'ies') + ' on this device. ' + (S.backupAt ? 'Last backup: ' + new Date(S.backupAt).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) + '.' : 'No backup saved yet.')) : 'No entries yet.';
   if(n >= 5 && (!S.backupAt || Date.now() - S.backupAt > 7*864e5) && !EXAMPLE) $('bkInfo').innerHTML = '<span class="chip">' + esc($('bkInfo').textContent) + '</span>';
   var ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints > 1);
   if(ios && !navigator.standalone) $('bkInfo').innerHTML += '<br><b>On iPhone and iPad:</b> tap Share, then Add to Home Screen, and open it from there. Safari can clear a website\u2019s data after 7 days without a visit; Home Screen apps keep theirs.';
